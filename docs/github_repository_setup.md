@@ -60,7 +60,7 @@ Open PowerShell.
 Run this command to enter the project folder:
 
 ```powershell
-cd "C:\Wireless Comm Portfolio\5g-sa-core-protocol-lab"
+cd "$HOME\projects\5g-sa-core-protocol-lab"
 ```
 
 Run this command to connect your local repository to GitHub:
