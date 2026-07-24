@@ -1,5 +1,10 @@
 # Configurations
 
-This directory will contain documented, lab-only copies of the Open5GS and UERANSIM configurations used by the project.
+This directory contains documented, lab-only copies of configurations used by the project.
 
-System configuration currently remains under `/etc/open5gs/`. Project copies will be added only when the baseline values are selected and explained. Real subscriber credentials and production network data must never be stored here.
+The Phase 4 UERANSIM examples and their field guide are under `ueransim/`.
+They remain templates until the shared baseline values are validated in Phase
+5. System configuration currently remains under `/etc/open5gs/`.
+
+Real subscriber credentials and production network data must never be stored
+here.

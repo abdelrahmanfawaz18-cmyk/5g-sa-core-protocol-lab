@@ -43,7 +43,7 @@ Open5GS AMF -- Open5GS SMF
 
 - [x] Environment prepared
 - [x] Open5GS installed
-- [ ] UERANSIM installed
+- [x] UERANSIM installed
 - [ ] gNB connected to AMF
 - [ ] UE registered
 - [ ] PDU session established
@@ -62,7 +62,7 @@ Open5GS AMF -- Open5GS SMF
 - [x] Phase 1: Push first commit
 - [x] Phase 2: Environment preflight
 - [x] Phase 3: Open5GS installation
-- [ ] Phase 4: UERANSIM installation
+- [x] Phase 4: UERANSIM installation
 - [ ] Phase 5: Baseline configuration
 - [ ] Phase 6: Successful registration
 - [ ] Phase 7: PDU session and user-plane traffic
@@ -91,4 +91,8 @@ Open5GS AMF -- Open5GS SMF
 
 ## Beginner Notes
 
-Work through the roadmap one phase at a time. Phases 1 through 3 are complete: the repository is established, the Ubuntu environment passed preflight, and Open5GS is installed and healthy. The next phase is UERANSIM installation, which should begin only when explicitly started.
+Work through the roadmap one phase at a time. Phases 1 through 4 are complete:
+the repository is established, the Ubuntu environment passed preflight,
+Open5GS is installed and healthy, and UERANSIM is built and documented. The
+next phase defines and validates the shared baseline configuration before any
+simulated node is started.
