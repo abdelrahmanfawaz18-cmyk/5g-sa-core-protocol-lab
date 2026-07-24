@@ -2,11 +2,11 @@
 
 ## Status
 
-Phase 2 environment preflight completed successfully on 2026-07-23.
+Phase 2 environment preflight completed successfully on 2026-07-23 and was audited against the full project roadmap on 2026-07-24.
 
 ## Environment Type
 
-The lab runs on a native, dual-boot Ubuntu installation on 64-bit x86 hardware. It is not running in WSL or a virtual machine.
+The lab runs on a native, dual-boot Ubuntu installation on 64-bit x86 hardware.
 
 ## Operating System
 
@@ -18,6 +18,13 @@ The lab runs on a native, dual-boot Ubuntu installation on 64-bit x86 hardware. 
 
 - Linux kernel: `6.17.0-35-generic`
 - Architecture: `x86_64`
+
+## Hardware Capacity
+
+- Logical CPUs: 24
+- Usable memory: approximately 15 GiB
+- Available lab-filesystem space during preflight: 33 GiB
+- The system meets the roadmap minimum of 4 CPU cores, 8 GB RAM, and 30 GB free disk space
 
 ## Git
 
@@ -48,6 +55,8 @@ The lab runs on a native, dual-boot Ubuntu installation on 64-bit x86 hardware. 
 - tcpdump: `4.99.4`
 - TShark (Wireshark): `4.2.2`
 - Both required packet inspection commands are installed and run successfully
+- A temporary five-packet capture was written to `/tmp` with no kernel drops and read successfully with TShark
+- The temporary capture is outside the repository and is not tracked by Git
 
 ## Tunnel Interface Support
 
@@ -55,7 +64,7 @@ The lab runs on a native, dual-boot Ubuntu installation on 64-bit x86 hardware. 
 
 ## Phase 2 Result
 
-**READY:** This Ubuntu environment passed the Phase 2 preflight and is ready for Phase 3.
+**READY:** This Ubuntu environment passed every Phase 2 roadmap completion gate and is ready for Phase 3.
 
 ## Next Step
 
