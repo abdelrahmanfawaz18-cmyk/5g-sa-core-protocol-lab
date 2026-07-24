@@ -92,7 +92,11 @@ The required 5G Core services are active and enabled:
 - `open5gs-pcfd`
 - `open5gs-nssfd`
 
-The package also installed supporting and legacy EPC services. In total, 17 Open5GS units are active and enabled, and systemd reports zero failed units.
+The package also installed supporting and legacy EPC services. In total, 17
+Open5GS units are active and enabled, and no Open5GS unit is failed. A
+host-level audit found one unrelated failed unit,
+`systemd-networkd-wait-online.service`; the active interfaces, default route,
+and core endpoints confirm that it does not block this lab.
 
 Startup logs confirm that the required control-plane functions registered with the NRF and that the SMF established its PFCP association with the UPF. The optional SEPP service reports that its second roaming peer is unavailable; this is expected because roaming is outside this single-host lab.
 
@@ -119,6 +123,32 @@ Startup logs confirm that the required control-plane functions registered with t
 
 **COMPLETE:** Open5GS is installed, the required services are healthy, configuration and log locations are known, listening endpoints are verified, and the core functions are documented.
 
+## UERANSIM Installation
+
+Phase 4 was completed on 2026-07-24:
+
+- UERANSIM version: `3.3.0`
+- Official source revision:
+  `2a3ef81f189ca95d5c1996a28ed7af9734f5cfb4`
+- Source directory: `~/UERANSIM`
+- gNB executable: `~/UERANSIM/build/nr-gnb`
+- UE executable: `~/UERANSIM/build/nr-ue`
+- CLI executable: `~/UERANSIM/build/nr-cli`
+- Required SCTP development and runtime packages are installed
+- All three executables exist and report version `3.3.0`
+- Project configuration templates and field explanations are stored under
+  `configs/ueransim/`
+
+The executables are not installed globally, so the documented paths must be
+used when they are started in a later phase.
+
+## Phase 4 Result
+
+**COMPLETE:** UERANSIM is built, the required executables are verified, the
+official Open5GS example configurations are copied into the repository, and
+the fields that must match the core and subscriber are documented.
+
 ## Next Step
 
-Phase 4 may begin with UERANSIM installation when explicitly started. UERANSIM was not installed or configured during Phase 3.
+Phase 5 will define and validate the shared baseline configuration. No gNB or
+UE should be started until that configuration map is complete.

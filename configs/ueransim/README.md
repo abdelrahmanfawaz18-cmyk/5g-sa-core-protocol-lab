@@ -9,10 +9,10 @@ The source and executable files are local machine dependencies and are not
 stored in this repository:
 
 ```text
-/home/fawaz/UERANSIM
-/home/fawaz/UERANSIM/build/nr-gnb
-/home/fawaz/UERANSIM/build/nr-ue
-/home/fawaz/UERANSIM/build/nr-cli
+~/UERANSIM
+~/UERANSIM/build/nr-gnb
+~/UERANSIM/build/nr-ue
+~/UERANSIM/build/nr-cli
 ```
 
 The YAML files in this directory are project copies of the official Open5GS
