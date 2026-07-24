@@ -95,4 +95,4 @@ Phase 1 is complete only when:
 - [x] The repository is public.
 - [x] The README is visible on GitHub.
 - [x] The first commit appears on GitHub.
-- [ ] The repository topics are added.
+- [x] The repository topics are added.
