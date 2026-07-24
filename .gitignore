@@ -1,0 +1,47 @@
+# Operating system files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Editor and IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs
+*.log
+logs/
+
+# Python generated files
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Python virtual environments
+.venv/
+venv/
+env/
+
+# Build and temporary files
+build/
+dist/
+tmp/
+temp/
+*.tmp
+
+# Large packet capture files should be added intentionally only after sanitizing.
+*.pcap
+*.pcapng
+
+# Local environment files and secrets
+.env
+.env.*
+*.key
+*.pem
+secrets/
+
