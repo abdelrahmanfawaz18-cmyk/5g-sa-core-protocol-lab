@@ -1,5 +1,5 @@
-# UERANSIM Open5GS UE example copied from upstream revision 2a3ef81.
-# This is a Phase 4 template. Values will be validated in Phase 5 before use.
+# UERANSIM Open5GS UE baseline derived from upstream revision 2a3ef81.
+# Shared values were validated against Open5GS during Phase 5.
 
 # IMSI number of the UE. IMSI = [MCC|MNC|MSISDN] (In total 15 digits)
 supi: 'imsi-999700000000001'
@@ -70,7 +70,6 @@ configured-nssai:
 # Default Configured NSSAI for this UE
 default-nssai:
   - sst: 1
-    sd: 1
 
 # Supported integrity algorithms by this UE
 integrity:

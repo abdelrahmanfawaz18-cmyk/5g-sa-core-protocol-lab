@@ -1,6 +1,6 @@
 # UERANSIM Configuration
 
-## Phase 4 Status
+## Installation Source
 
 UERANSIM 3.3.0 was built successfully from official source revision
 `2a3ef81f189ca95d5c1996a28ed7af9734f5cfb4`.
@@ -15,10 +15,10 @@ stored in this repository:
 ~/UERANSIM/build/nr-cli
 ```
 
-The YAML files in this directory are project copies of the official Open5GS
-examples from that revision. They are Phase 4 templates, not a confirmed
-working baseline. Phase 5 will compare every shared value with Open5GS before
-the programs are started.
+The YAML files in this directory are based on the official Open5GS examples
+from that revision. Phase 5 validated their shared values against the active
+Open5GS configuration and synthetic subscriber profile. End-to-end behaviour
+will be proven in Phases 6 and 7.
 
 All subscriber values in these files are isolated lab examples. Never replace
 them with credentials or identifiers from a real mobile subscription.
@@ -63,7 +63,7 @@ The UE configuration is `open5gs-ue.yaml`.
 | `tunNetmask` | Netmask for the UE tunnel interface | Controls the local subnet created after a PDU session |
 | `useNamespace` | Places the UE tunnel in a Linux network namespace | `false` keeps the first lab topology simple |
 
-## Shared Values To Validate In Phase 5
+## Validated Shared Values
 
 The following values form configuration contracts between components:
 
@@ -77,6 +77,9 @@ Data:        DNN/APN
 Slice:       SST + optional SD
 ```
 
+The selected baseline uses PLMN `999-70`, TAC `1`, DNN `internet`, and SST `1`
+without an SD. The complete matching contract is documented in
+`docs/configuration_map.md`.
+
 One mismatch can prevent gNB connectivity, UE registration, authentication, or
-PDU-session establishment. Phase 5 will build a single configuration map so
-these values are selected deliberately instead of guessed.
+PDU-session establishment.

@@ -63,7 +63,7 @@ Open5GS AMF -- Open5GS SMF
 - [x] Phase 2: Environment preflight
 - [x] Phase 3: Open5GS installation
 - [x] Phase 4: UERANSIM installation
-- [ ] Phase 5: Baseline configuration
+- [x] Phase 5: Baseline configuration
 - [ ] Phase 6: Successful registration
 - [ ] Phase 7: PDU session and user-plane traffic
 - [ ] Phase 8: Packet capture evidence
@@ -91,11 +91,15 @@ Open5GS AMF -- Open5GS SMF
 
 ## Beginner Notes
 
-Work through the roadmap one phase at a time. Phases 1 through 4 are complete:
+Work through the roadmap one phase at a time. Phases 1 through 5 are complete:
 the repository is established, the Ubuntu environment passed preflight,
-Open5GS is installed and healthy, and UERANSIM is built and documented. The
-next phase defines and validates the shared baseline configuration before any
-simulated node is started.
+Open5GS is installed and healthy, UERANSIM is built, and the shared baseline
+configuration and synthetic subscriber are validated. The next phase starts
+the gNB and proves UE registration.
 
 For a detailed explanation of what was completed and how the 5G components
 communicate, read the [beginner guide to Phases 1-4](docs/phases_1_to_4/README.md).
+
+The shared Phase 5 values and matching rules are documented in the
+[lab configuration map](docs/configuration_map.md). The supporting checks are
+summarized in the [Phase 5 completion report](reports/phase_5_completion.md).

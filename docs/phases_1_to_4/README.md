@@ -921,12 +921,12 @@ a subscriber record and matching UE, gNB, and core configuration.
 Linux treats them as different local addresses. This lets SMF, AMF, and UPF
 have distinct endpoints.
 
-## 11. Current Boundary
+## 11. Boundary at the End of Phase 4
 
 Phases 1 through 4 prepared and verified the project, host, core, and simulator.
 They did not prove end-to-end 5G operation.
 
-The next phase must create one configuration map covering:
+Phase 5 must create one configuration map covering:
 
 ```text
 MCC
@@ -945,6 +945,9 @@ S-NSSAI SD, if used
 
 Only after those values are checked across every component should the gNB and
 UE be started.
+
+That map has now been completed and is available in
+[`docs/configuration_map.md`](../configuration_map.md).
 
 ## 12. Related Project Documentation
 

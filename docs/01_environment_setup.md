@@ -150,5 +150,6 @@ the fields that must match the core and subscriber are documented.
 
 ## Next Step
 
-Phase 5 will define and validate the shared baseline configuration. No gNB or
-UE should be started until that configuration map is complete.
+Phase 5 completed the shared baseline configuration and subscriber validation.
+Phase 6 may begin with a controlled gNB start and NG Setup verification before
+the UE is started.
