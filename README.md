@@ -38,7 +38,7 @@ Data Network / Internet
 - Wireshark and tshark capture workflows
 - Failure reproduction and troubleshooting
 - Python validation tooling
-- Clear technical documentation for interviews
+- Clear technical documentation
 
 ## Current Status
 
@@ -71,7 +71,7 @@ Data Network / Internet
 - [ ] Phase 9: Failure scenarios
 - [ ] Phase 10: Python lab validation tool
 - [ ] Phase 11: GitHub README polish
-- [ ] Phase 12: Resume and interview packaging
+- [ ] Phase 12: Final project notes and cleanup
 
 ## Repository Structure
 
@@ -88,10 +88,8 @@ Data Network / Internet
   screenshots/
   diagrams/
   tests/
-  resume/
 ```
 
 ## Beginner Notes
 
 Start from the top of the roadmap and do one phase at a time. Do not install Open5GS yet. The next task after Phase 1 is complete will be Phase 2, which checks the computer environment before installing anything.
-

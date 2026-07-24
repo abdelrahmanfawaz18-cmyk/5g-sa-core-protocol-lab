@@ -17,7 +17,6 @@ Use this checklist to confirm Phase 1 is complete before moving to Phase 2.
 - [x] `screenshots/` exists.
 - [x] `diagrams/` exists.
 - [x] `tests/` exists.
-- [x] `resume/` exists.
 
 ## README
 
@@ -34,4 +33,3 @@ Use this checklist to confirm Phase 1 is complete before moving to Phase 2.
 - [ ] Initial commit is pushed to GitHub.
 
 Do not start Phase 2 until every item above is checked.
-
