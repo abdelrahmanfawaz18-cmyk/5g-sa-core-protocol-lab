@@ -66,6 +66,59 @@ The lab runs on a native, dual-boot Ubuntu installation on 64-bit x86 hardware.
 
 **READY:** This Ubuntu environment passed every Phase 2 roadmap completion gate and is ready for Phase 3.
 
+## Open5GS Installation
+
+Phase 3 was completed on 2026-07-24 using packages built for Ubuntu 24.04:
+
+- Open5GS: `2.8.0~noble5`
+- MongoDB Community: `8.0.28`
+- Installation method: Open5GS release PPA and the official MongoDB 8.0 repository
+- MongoDB service: active, enabled at boot, and responding to database commands
+- Open5GS WebUI: not installed because it is optional and not required for the Phase 3 completion gate
+
+MongoDB has not created the `open5gs` database yet because no subscriber data has been written. The UDR and PCF configurations already point to `mongodb://localhost/open5gs`; MongoDB will create the database when data is first stored in a later phase.
+
+## Open5GS Services
+
+The required 5G Core services are active and enabled:
+
+- `open5gs-nrfd`
+- `open5gs-amfd`
+- `open5gs-smfd`
+- `open5gs-upfd`
+- `open5gs-ausfd`
+- `open5gs-udmd`
+- `open5gs-udrd`
+- `open5gs-pcfd`
+- `open5gs-nssfd`
+
+The package also installed supporting and legacy EPC services. In total, 17 Open5GS units are active and enabled, and systemd reports zero failed units.
+
+Startup logs confirm that the required control-plane functions registered with the NRF and that the SMF established its PFCP association with the UPF. The optional SEPP service reports that its second roaming peer is unavailable; this is expected because roaming is outside this single-host lab.
+
+## Open5GS Files
+
+- Configuration directory: `/etc/open5gs/`
+- Log directory: `/var/log/open5gs/`
+- Function-specific YAML configuration files and logs are stored in these directories
+- The package defaults are still in place; no PLMN, TAC, DNN, S-NSSAI, subscriber, routing, or NAT configuration was changed in Phase 3
+
+## Verified Open5GS Endpoints
+
+| Function | Purpose | Local endpoint |
+|---|---|---|
+| AMF | N2/NGAP | `127.0.0.5:38412` over SCTP |
+| AMF | Service-based interface | `127.0.0.5:7777` over TCP |
+| SMF | Service-based interface | `127.0.0.4:7777` over TCP |
+| SMF and UPF | N4/PFCP | `127.0.0.4:8805` and `127.0.0.7:8805` over UDP |
+| UPF | N3/GTP-U | `127.0.0.7:2152` over UDP |
+| NRF | Service registration and discovery | `127.0.0.10:7777` over TCP |
+| MongoDB | Subscriber and policy data | `127.0.0.1:27017` over TCP |
+
+## Phase 3 Result
+
+**COMPLETE:** Open5GS is installed, the required services are healthy, configuration and log locations are known, listening endpoints are verified, and the core functions are documented.
+
 ## Next Step
 
-Phase 3 may begin with Open5GS installation when explicitly started. Open5GS and UERANSIM were not installed or configured during Phase 2.
+Phase 4 may begin with UERANSIM installation when explicitly started. UERANSIM was not installed or configured during Phase 3.

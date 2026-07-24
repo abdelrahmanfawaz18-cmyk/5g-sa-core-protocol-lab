@@ -43,7 +43,7 @@ Data Network / Internet
 ## Current Status
 
 - [x] Environment prepared
-- [ ] Open5GS installed
+- [x] Open5GS installed
 - [ ] UERANSIM installed
 - [ ] gNB connected to AMF
 - [ ] UE registered
@@ -62,7 +62,7 @@ Data Network / Internet
 - [x] Phase 1: Create public GitHub repository
 - [x] Phase 1: Push first commit
 - [x] Phase 2: Environment preflight
-- [ ] Phase 3: Open5GS installation
+- [x] Phase 3: Open5GS installation
 - [ ] Phase 4: UERANSIM installation
 - [ ] Phase 5: Baseline configuration
 - [ ] Phase 6: Successful registration
