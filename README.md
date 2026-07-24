@@ -59,8 +59,8 @@ Data Network / Internet
 - [x] Phase 1: Add README skeleton
 - [x] Phase 1: Add `.gitignore`
 - [x] Phase 1: Add initial documentation
-- [ ] Phase 1: Create public GitHub repository
-- [ ] Phase 1: Push first commit
+- [x] Phase 1: Create public GitHub repository
+- [x] Phase 1: Push first commit
 - [ ] Phase 2: Environment preflight
 - [ ] Phase 3: Open5GS installation
 - [ ] Phase 4: UERANSIM installation

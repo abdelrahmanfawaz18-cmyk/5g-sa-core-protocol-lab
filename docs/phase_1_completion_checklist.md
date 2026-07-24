@@ -29,7 +29,7 @@ Use this checklist to confirm Phase 1 is complete before moving to Phase 2.
 
 ## GitHub
 
-- [ ] Public GitHub repository exists.
-- [ ] Initial commit is pushed to GitHub.
+- [x] Public GitHub repository exists.
+- [x] Initial commit is pushed to GitHub.
 
 Do not start Phase 2 until every item above is checked.

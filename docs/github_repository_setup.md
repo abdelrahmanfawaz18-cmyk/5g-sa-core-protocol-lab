@@ -1,6 +1,6 @@
 # GitHub Repository Setup
 
-Status: Waiting for public GitHub repository creation.
+Status: Public GitHub repository created and initial commits pushed.
 
 This file is for Phase 1 only. Follow these steps after the local repository shell exists.
 
@@ -91,9 +91,8 @@ After the push succeeds:
 
 Phase 1 is complete only when:
 
-- [ ] The GitHub repository page opens successfully.
-- [ ] The repository is public.
-- [ ] The README is visible on GitHub.
-- [ ] The first commit appears on GitHub.
+- [x] The GitHub repository page opens successfully.
+- [x] The repository is public.
+- [x] The README is visible on GitHub.
+- [x] The first commit appears on GitHub.
 - [ ] The repository topics are added.
-
