@@ -10,22 +10,21 @@ The final diagram will be added after the lab design is confirmed.
 
 ```text
 Simulated UE
-   |
-   | N1: 5G NAS, carried through the gNB
-   |
+    |
+    | N1: 5G NAS, carried through the gNB
+    v
 UERANSIM gNB
-   |
-   | N2: NGAP over SCTP
-   |
-Open5GS AMF
-   |
-   | 5G Core service-based interfaces
-   |
-Open5GS SMF ---- N4: PFCP ---- Open5GS UPF
-   |
-   | N3: GTP-U user-plane tunnel from gNB to UPF
-   |
-Data Network / Internet
+    | \
+    |  \ N3: GTP-U/UDP
+    |   \
+    |    v
+    |   Open5GS UPF ---- N6: IP ---- Data Network
+    |          ^
+    |          |
+    |          | N4: PFCP/UDP
+    v          |
+Open5GS AMF -- Open5GS SMF
+ N2: NGAP/SCTP
 ```
 
 ## Target Skills Demonstrated
@@ -92,4 +91,4 @@ Data Network / Internet
 
 ## Beginner Notes
 
-Start from the top of the roadmap and do one phase at a time. Do not install Open5GS yet. The next task after Phase 1 is complete will be Phase 2, which checks the computer environment before installing anything.
+Work through the roadmap one phase at a time. Phases 1 through 3 are complete: the repository is established, the Ubuntu environment passed preflight, and Open5GS is installed and healthy. The next phase is UERANSIM installation, which should begin only when explicitly started.
