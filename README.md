@@ -96,3 +96,6 @@ the repository is established, the Ubuntu environment passed preflight,
 Open5GS is installed and healthy, and UERANSIM is built and documented. The
 next phase defines and validates the shared baseline configuration before any
 simulated node is started.
+
+For a detailed explanation of what was completed and how the 5G components
+communicate, read the [beginner guide to Phases 1-4](docs/phases_1_to_4/README.md).
