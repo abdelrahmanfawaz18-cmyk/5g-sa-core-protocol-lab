@@ -1,0 +1,41 @@
+Phase 6 N2 tshark summary
+Generated from: captures/successful/n2_registration_attempt.pcap
+
+Capture format: pcap, Linux cooked-mode capture v2
+Packets: 210
+File size: 27 kB
+Capture duration: 492.933519 seconds
+SHA256: 65a30ad812db1f639bb1ca164b0e78908095ed8cf0a2e0535f5d1086fe41b901
+Endpoints: 127.0.0.1 and 127.0.0.5 only
+Capture filter: SCTP port 38412
+
+Frame | Relative time | Source    | Destination | NGAP/NAS summary
+5     | 0.000532      | 127.0.0.1 | 127.0.0.5   | NGSetupRequest
+7     | 0.032264      | 127.0.0.5 | 127.0.0.1   | NGSetupResponse
+39    | 87.230361     | 127.0.0.1 | 127.0.0.5   | InitialUEMessage, Registration request
+40    | 87.260230     | 127.0.0.5 | 127.0.0.1   | DownlinkNASTransport, Authentication request
+41    | 87.262453     | 127.0.0.1 | 127.0.0.5   | UplinkNASTransport, Authentication failure (Synch failure)
+42    | 87.271021     | 127.0.0.5 | 127.0.0.1   | DownlinkNASTransport, Authentication request
+43    | 87.273084     | 127.0.0.1 | 127.0.0.5   | UplinkNASTransport, Authentication response
+44    | 87.279705     | 127.0.0.5 | 127.0.0.1   | DownlinkNASTransport, Security mode command
+45    | 87.281636     | 127.0.0.1 | 127.0.0.5   | Protected UplinkNASTransport
+46    | 87.301172     | 127.0.0.5 | 127.0.0.1   | InitialContextSetupRequest with protected NAS
+47    | 87.302063     | 127.0.0.1 | 127.0.0.5   | InitialContextSetupResponse
+49    | 87.509537     | 127.0.0.1 | 127.0.0.5   | Two protected UplinkNASTransport messages
+
+Protected-message correlation:
+- Frame 45 aligns with UERANSIM Security Mode Complete.
+- Frame 46 aligns with UERANSIM Registration Accept.
+- Frame 49 aligns with UERANSIM Registration Complete and the later session request.
+
+Live UERANSIM state after registration:
+cm-state: CM-CONNECTED
+rm-state: RM-REGISTERED
+mm-state: MM-REGISTERED/NORMAL-SERVICE
+5u-state: 5U1-UPDATED
+selected-plmn: 999/70
+current-tac: 1
+
+The packet capture, UERANSIM state/output, and Open5GS AMF log were correlated
+because encrypted NAS payloads cannot be named from the packet capture without
+derived session keys.

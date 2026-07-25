@@ -151,5 +151,6 @@ the fields that must match the core and subscriber are documented.
 ## Next Step
 
 Phase 5 completed the shared baseline configuration and subscriber validation.
-Phase 6 may begin with a controlled gNB start and NG Setup verification before
-the UE is started.
+Phase 6 then proved NG Setup, authentication, NAS security activation, and
+successful registration for one synthetic UE. Phase 7 may begin with
+independent PDU-session and user-plane validation.
