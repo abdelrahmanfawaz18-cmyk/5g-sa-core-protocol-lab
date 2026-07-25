@@ -33,7 +33,8 @@ imeiSv: '4370816125816151'
 tunNetmask: '255.255.255.0'
 
 # Create the UE TUN interface inside a dedicated Linux network namespace.
-useNamespace: false
+# This keeps the simulated UE separate from the co-located Open5GS host.
+useNamespace: true
 
 # Optional prefix used when deriving the namespace name.
 nsNamePrefix: 'ueransim'

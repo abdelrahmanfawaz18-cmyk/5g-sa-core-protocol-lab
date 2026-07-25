@@ -15,3 +15,19 @@ values. The capture is intentionally included after endpoint, protocol, size,
 and identity review.
 
 See `reports/phase_6_tshark_summary.txt` for a concise text interpretation.
+
+## PDU Session And User Plane
+
+`successful/pdu_session_and_user_plane.pcap` is the reviewed Phase 7 capture.
+
+It contains the relevant registration and PDU-session setup window, followed
+by five successful ICMP exchanges. The evidence includes NGAP, PFCP,
+bidirectional GTP-U, and the plain N6-side ICMP packets.
+
+The capture was reduced from the full local recording before inclusion.
+Unrelated heartbeats and background traffic were removed. The retained values
+are synthetic lab identity data, local lab addresses, the private host and
+gateway addresses involved in translation, and the public ping target.
+
+See `reports/phase_7_tshark_summary.txt` for the verified frame mapping,
+protocol counts, tunnel directions, and file hash.

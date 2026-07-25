@@ -61,7 +61,21 @@ The UE configuration is `open5gs-ue.yaml`.
 | `configured-nssai` | Slices configured for the UE | Must include the intended lab slice |
 | `default-nssai` | UE default slice | Its SST and optional SD must be compatible with the core |
 | `tunNetmask` | Netmask for the UE tunnel interface | Controls the local subnet created after a PDU session |
-| `useNamespace` | Places the UE tunnel in a Linux network namespace | `false` keeps the first lab topology simple |
+| `useNamespace` | Places the UE tunnel in a Linux network namespace | `true` keeps the simulated UE separate from the co-located Open5GS host |
+| `nsNamePrefix` | Prefix for the generated Linux namespace name | Helps identify the namespace used for UE data-plane tests |
+
+For this baseline, UERANSIM creates the namespace
+`ueransim-999700000000001-internet-psi1` after PDU Session 1 is established.
+Commands run on behalf of the UE must execute inside that namespace. For
+example:
+
+```bash
+sudo ip netns exec ueransim-999700000000001-internet-psi1 ping -c 5 8.8.8.8
+```
+
+Namespace isolation is important because Open5GS and UERANSIM run on the same
+Ubuntu host. It prevents Linux from treating the UE address as an address of
+the core host and preserves the intended routed path through the UPF.
 
 ## Validated Shared Values
 

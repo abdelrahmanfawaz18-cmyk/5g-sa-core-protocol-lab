@@ -1,0 +1,56 @@
+Phase 7 PDU-session and user-plane tshark summary
+Generated from: captures/successful/pdu_session_and_user_plane.pcap
+
+Capture format: pcap, Linux cooked-mode capture v2
+Packets: 49
+File size: 7645 bytes
+Capture duration: 320.747067 seconds
+SHA256: 6040d3e54f79926d9ae2db70664fc1342d98716ab5c9ec00e147dae079ee81f7
+Capture filter: SCTP port 38412 or UDP port 8805 or UDP port 2152 or ICMP
+
+Public-evidence review:
+- retained the registration and PDU-session setup window;
+- retained the five successful ping exchanges across N3 and N6;
+- removed unrelated protocol heartbeats and background traffic;
+- synthetic lab identity and local lab addresses only.
+
+Protocol counts:
+- NGAP: 11 frames
+- PFCP: 6 frames
+- GTP-U: 10 frames
+- ICMP inside GTP-U: 5 echo requests and 5 echo replies
+- Plain ICMP along the N6 path: 10 echo requests and 10 echo replies
+
+Frame | Relative time | Source      | Destination | Summary
+1     | 0.000000      | 127.0.0.1  | 127.0.0.5   | Initial UE Message, Registration Request
+11    | 0.244801      | 127.0.0.1  | 127.0.0.5   | Protected uplink NAS transport
+13    | 0.260304      | 127.0.0.4  | 127.0.0.7   | PFCP Session Establishment Request
+14    | 0.260730      | 127.0.0.7  | 127.0.0.4   | PFCP Session Establishment Response
+15    | 0.262283      | 127.0.0.5  | 127.0.0.1   | NGAP PDU Session Resource Setup Request
+17    | 0.265156      | 127.0.0.1  | 127.0.0.5   | NGAP PDU Session Resource Setup Response
+18    | 0.266187      | 127.0.0.4  | 127.0.0.7   | PFCP Session Modification Request
+19    | 0.266354      | 127.0.0.7  | 127.0.0.4   | PFCP Session Modification Response
+
+Ping | Uplink GTP-U request | Downlink GTP-U reply
+1    | frame 20             | frame 25
+2    | frame 26             | frame 31
+3    | frame 32             | frame 37
+4    | frame 38             | frame 43
+5    | frame 44             | frame 49
+
+Uplink GTP-U:
+- outer IP: 127.0.0.1 -> 127.0.0.7
+- inner IP: 10.45.0.4 -> 8.8.8.8
+- TEID: 0x0000a2ab
+
+Downlink GTP-U:
+- outer IP: 127.0.0.7 -> 127.0.0.1
+- inner IP: 8.8.8.8 -> 10.45.0.4
+- TEID: 0x00000001
+
+Connectivity result:
+- command: sudo ip netns exec ueransim-999700000000001-internet-psi1 ping -c 5 8.8.8.8
+- transmitted: 5
+- received: 5
+- packet loss: 0%
+- RTT min/avg/max/mdev: 17.346/19.649/23.604/2.355 ms

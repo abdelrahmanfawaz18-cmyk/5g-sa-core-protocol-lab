@@ -46,9 +46,9 @@ Open5GS AMF -- Open5GS SMF
 - [x] UERANSIM installed
 - [x] gNB connected to AMF
 - [x] UE registered
-- [ ] PDU session established
-- [ ] User traffic passed through UPF
-- [ ] Successful packet captures collected
+- [x] PDU session established
+- [x] User traffic passed through UPF
+- [x] Successful packet captures collected
 - [ ] Failure scenarios documented
 - [ ] Python lab validation tool completed
 
@@ -65,7 +65,7 @@ Open5GS AMF -- Open5GS SMF
 - [x] Phase 4: UERANSIM installation
 - [x] Phase 5: Baseline configuration
 - [x] Phase 6: Successful registration
-- [ ] Phase 7: PDU session and user-plane traffic
+- [x] Phase 7: PDU session and user-plane traffic
 - [ ] Phase 8: Packet capture evidence
 - [ ] Phase 9: Failure scenarios
 - [ ] Phase 10: Python lab validation tool
@@ -91,12 +91,14 @@ Open5GS AMF -- Open5GS SMF
 
 ## Beginner Notes
 
-Work through the roadmap one phase at a time. Phases 1 through 6 are complete:
+Work through the roadmap one phase at a time. Phases 1 through 7 are complete:
 the repository is established, the Ubuntu environment passed preflight,
 Open5GS is installed and healthy, UERANSIM is built, and the shared baseline
 configuration and synthetic subscriber are validated. The gNB connected to
 the AMF, and the UE completed authentication, NAS security activation, and
-registration. The next phase validates the PDU session and user plane.
+registration. The UE then established an IPv4 PDU session, received an
+isolated tunnel interface, and passed bidirectional traffic through the UPF.
+The next phase creates a reusable packet-analysis guide.
 
 For a detailed explanation of what was completed and how the 5G components
 communicate, read the [beginner guide to Phases 1-4](docs/phases_1_to_4/README.md).
@@ -109,3 +111,9 @@ The observed registration messages are explained in the
 [successful registration flow](docs/03_successful_registration_flow.md), with
 supporting results in the
 [Phase 6 completion report](reports/phase_6_completion.md).
+
+The control and user-plane steps are explained in the
+[PDU session flow](docs/04_pdu_session_flow.md), with interface and routing
+evidence in the
+[UE connectivity report](reports/ue_interface_success.md) and the final gate
+in the [Phase 7 completion report](reports/phase_7_completion.md).
