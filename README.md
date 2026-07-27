@@ -49,6 +49,7 @@ Open5GS AMF -- Open5GS SMF
 - [x] PDU session established
 - [x] User traffic passed through UPF
 - [x] Successful packet captures collected
+- [x] Packet-analysis guide and Wireshark evidence completed
 - [ ] Failure scenarios documented
 - [ ] Python lab validation tool completed
 
@@ -66,7 +67,7 @@ Open5GS AMF -- Open5GS SMF
 - [x] Phase 5: Baseline configuration
 - [x] Phase 6: Successful registration
 - [x] Phase 7: PDU session and user-plane traffic
-- [ ] Phase 8: Packet capture evidence
+- [x] Phase 8: Packet capture evidence
 - [ ] Phase 9: Failure scenarios
 - [ ] Phase 10: Python lab validation tool
 - [ ] Phase 11: GitHub README polish
@@ -91,14 +92,15 @@ Open5GS AMF -- Open5GS SMF
 
 ## Beginner Notes
 
-Work through the roadmap one phase at a time. Phases 1 through 7 are complete:
+Work through the roadmap one phase at a time. Phases 1 through 8 are complete:
 the repository is established, the Ubuntu environment passed preflight,
 Open5GS is installed and healthy, UERANSIM is built, and the shared baseline
 configuration and synthetic subscriber are validated. The gNB connected to
 the AMF, and the UE completed authentication, NAS security activation, and
 registration. The UE then established an IPv4 PDU session, received an
 isolated tunnel interface, and passed bidirectional traffic through the UPF.
-The next phase creates a reusable packet-analysis guide.
+The complete lifecycle is captured, filtered, and interpreted with tshark and
+Wireshark. The next phase introduces controlled failure scenarios.
 
 For a detailed explanation of what was completed and how the 5G components
 communicate, read the [beginner guide to Phases 1-4](docs/phases_1_to_4/README.md).
@@ -117,3 +119,28 @@ The control and user-plane steps are explained in the
 evidence in the
 [UE connectivity report](reports/ue_interface_success.md) and the final gate
 in the [Phase 7 completion report](reports/phase_7_completion.md).
+
+The [packet capture guide](docs/05_packet_capture_guide.md) explains how to
+separate control-plane and user-plane traffic, follow encapsulation, and
+correlate protocol messages. The supporting gate is in the
+[Phase 8 completion report](reports/phase_8_completion.md).
+
+## Packet Analysis Quick Reference
+
+| Filter | Purpose |
+| --- | --- |
+| `sctp` | N2 transport association and shutdown |
+| `ngap` | gNB-to-AMF signalling |
+| `nas-5gs` | Decodable UE-to-core NAS messages |
+| `pfcp` | SMF-to-UPF control |
+| `gtp` | N3 user-plane tunnelling |
+| `gtp && icmp` | Ping traffic inside GTP-U |
+| `icmp && !gtp` | Plain ping traffic outside GTP-U |
+
+### NGAP Carrying NAS
+
+![NGAP Initial UE Message carrying a NAS Registration Request](screenshots/wireshark_ngap_nas.png)
+
+### PFCP And GTP-U
+
+![PFCP session setup and GTP-U ICMP evidence](screenshots/wireshark_pfcp_gtpu.png)

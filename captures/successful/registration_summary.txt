@@ -1,0 +1,45 @@
+Successful registration packet summary
+Source: captures/successful/full_successful_run.pcap
+
+Capture format: pcap, Linux cooked-mode capture v2
+Reviewed packets: 64
+File size: 9512 bytes
+Capture duration: 555.066027 seconds
+SHA256: 011d538635fe836c4ee50dcb011e3d46e53fd875baa7980c499829da912d2a97
+Display filter: ngap || nas-5gs
+N2 endpoints: gNB 127.0.0.1, AMF 127.0.0.5
+
+Frame | Relative time | Direction  | Message
+1     | 0.000000      | gNB -> AMF | SCTP INIT
+2     | 0.000051      | AMF -> gNB | SCTP INIT ACK
+3     | 0.000080      | gNB -> AMF | SCTP COOKIE ECHO
+4     | 0.000115      | AMF -> gNB | SCTP COOKIE ACK
+5     | 0.001827      | gNB -> AMF | NG Setup Request
+7     | 0.010416      | AMF -> gNB | NG Setup Response
+9     | 22.412029     | gNB -> AMF | Initial UE Message, Registration Request
+10    | 22.423579     | AMF -> gNB | Downlink NAS Transport, Authentication Request
+11    | 22.425886     | gNB -> AMF | Uplink NAS Transport, Authentication Response
+12    | 22.434343     | AMF -> gNB | Downlink NAS Transport, Security Mode Command
+13    | 22.436803     | gNB -> AMF | Protected Uplink NAS Transport
+14    | 22.460270     | AMF -> gNB | Initial Context Setup Request with protected NAS
+15    | 22.461282     | gNB -> AMF | Initial Context Setup Response
+17    | 22.663427     | gNB -> AMF | Protected uplink NAS transports
+18    | 22.663875     | AMF -> gNB | Protected Downlink NAS Transport
+
+UERANSIM correlation:
+- frame 13 aligns with Security Mode Complete;
+- frame 14 aligns with Registration Accept;
+- frame 17 aligns with Registration Complete and the PDU-session request;
+- the live UE state reached MM-REGISTERED/NORMAL-SERVICE.
+
+After NAS security activation, protected inner NAS messages cannot be named
+completely without the derived session keys. The frame direction, enclosing
+NGAP procedure, simulator output, and timestamps provide the correlation.
+
+Controlled release:
+56 | 542.854671 | gNB -> AMF | UE Context Release Request
+59 | 542.867182 | AMF -> gNB | UE Context Release Command
+60 | 542.867722 | gNB -> AMF | UE Context Release Complete
+62 | 555.065982 | gNB -> AMF | SCTP SHUTDOWN
+63 | 555.066013 | AMF -> gNB | SCTP SHUTDOWN ACK
+64 | 555.066027 | gNB -> AMF | SCTP SHUTDOWN COMPLETE

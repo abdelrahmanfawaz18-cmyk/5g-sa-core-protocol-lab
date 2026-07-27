@@ -17,7 +17,7 @@ fi
 
 mkdir -p "$capture_directory"
 
-echo "Capturing Phase 7 control-plane and user-plane traffic."
+echo "Capturing 5G SA control-plane and user-plane traffic."
 echo "Interface: any"
 echo "Filter:    $capture_filter"
 echo "Output:    $capture_file"

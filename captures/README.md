@@ -31,3 +31,22 @@ gateway addresses involved in translation, and the public ping target.
 
 See `reports/phase_7_tshark_summary.txt` for the verified frame mapping,
 protocol counts, tunnel directions, and file hash.
+
+## Full Successful Lifecycle
+
+`successful/full_successful_run.pcap` is the Phase 8 analysis capture. It
+contains the reviewed lifecycle from SCTP association and NG Setup through
+registration, PDU-session establishment, bidirectional GTP-U traffic, UE
+context release, and SCTP shutdown.
+
+Supporting summaries:
+
+- `successful/registration_summary.txt`
+- `successful/pdu_session_summary.txt`
+
+The local raw capture contained 715 packets with zero kernel drops. Periodic
+keepalives and unrelated background ICMP were removed, leaving 64 relevant
+packets in strict timestamp order.
+
+See `docs/05_packet_capture_guide.md` for commands, filters, frame landmarks,
+and interpretation.

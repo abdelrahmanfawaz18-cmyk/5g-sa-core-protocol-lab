@@ -11,7 +11,8 @@ Phase 6 run scripts are under `run/`:
   readiness.
 - `capture_n2.sh` records NGAP/NAS signalling on SCTP port `38412`.
 - `capture_pdu_session.sh` records N2, PFCP, GTP-U, and ICMP evidence for
-  Phase 7.
+  PDU-session and full-lifecycle analysis. An optional path argument selects
+  the output file.
 - `start_gnb.sh` runs the gNB in the foreground with the repository baseline.
 - `start_ue.sh` runs the UE in the foreground with the repository baseline.
 
