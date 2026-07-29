@@ -6,7 +6,9 @@ All subscriber identifiers, keys, network names, addresses, and examples in this
 
 ## Architecture Diagram
 
-The final diagram will be added after the lab design is confirmed.
+The complete labelled map, including network functions, interfaces,
+protocols, and control/user-plane separation, is in the
+[5G Standalone learning handbook](docs/learning/README.md).
 
 ```text
 Simulated UE
@@ -102,6 +104,13 @@ isolated tunnel interface, and passed bidirectional traffic through the UPF.
 The complete lifecycle is captured, filtered, and interpreted with tshark and
 Wireshark. The next phase introduces controlled failure scenarios.
 
+Before starting the controlled failure scenarios, use the
+[5G Standalone learning handbook](docs/learning/README.md) to build a reusable
+mental model of the architecture. It includes a full system map, component
+responsibilities, interface and protocol tables, identifier explanations, the
+complete successful procedure, packet-analysis methods, and an acronym
+glossary.
+
 For a detailed explanation of what was completed and how the 5G components
 communicate, read the [beginner guide to Phases 1-4](docs/phases_1_to_4/README.md).
 
@@ -124,6 +133,10 @@ The [packet capture guide](docs/05_packet_capture_guide.md) explains how to
 separate control-plane and user-plane traffic, follow encapsulation, and
 correlate protocol messages. The supporting gate is in the
 [Phase 8 completion report](reports/phase_8_completion.md).
+
+The [controlled failure scenario guide](docs/06_failure_scenario_guide.md)
+defines the Phase 9 one-variable method, safety checks, evidence requirements,
+and recovery gate.
 
 ## Packet Analysis Quick Reference
 

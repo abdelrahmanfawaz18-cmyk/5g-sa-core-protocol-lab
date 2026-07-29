@@ -1,0 +1,36 @@
+Wrong PLMN concise log evidence
+===============================
+
+Failure-side UERANSIM gNB
+-------------------------
+2026-07-29 00:16:58.392  Trying to establish SCTP connection to 127.0.0.5:38412
+2026-07-29 00:16:58.393  SCTP connection established
+2026-07-29 00:16:58.394  Sending NG Setup Request
+2026-07-29 00:16:58.397  NG Setup procedure failed
+Cause: misc/unknown-PLMN-or-SNPN
+
+Failure-side Open5GS AMF
+------------------------
+2026-07-29 00:16:58.394  gNB N2 transport accepted from 127.0.0.1
+2026-07-29 00:16:58.397  NG Setup failure
+2026-07-29 00:16:58.397  global gNB ID PLMN is foreign
+
+Recovery-side evidence
+----------------------
+2026-07-29 01:01:57.887  AMF accepted the baseline gNB N2 transport
+2026-07-29 01:01:57.900  Packet capture recorded NG Setup Response
+UERANSIM reported: NG Setup procedure is successful
+2026-07-29 01:02:33.062  Controlled gNB removal completed
+
+Interpretation
+--------------
+The failure was not caused by an unreachable AMF or failed SCTP association.
+The AMF accepted the N2 transport, decoded the NG Setup Request, identified
+the advertised PLMN as foreign, and returned the standardized NGAP failure
+cause. Starting the unchanged PLMN 999-70 baseline produced NG Setup Response.
+
+Raw-evidence handling
+---------------------
+The full gNB console log and AMF journal were reviewed. This file retains only
+the lines needed to establish transport success, PLMN rejection, restoration,
+and recovery. The local raw console log remains ignored by Git.

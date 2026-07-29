@@ -50,3 +50,10 @@ packets in strict timestamp order.
 
 See `docs/05_packet_capture_guide.md` for commands, filters, frame landmarks,
 and interpretation.
+
+## Controlled Failure Scenarios
+
+The Phase 9 evidence structure is under `failures/`. Raw failure captures and
+logs remain ignored until each file has been reduced to the relevant protocol
+window and reviewed. The workflow and completion rules are documented in
+`docs/06_failure_scenario_guide.md`.

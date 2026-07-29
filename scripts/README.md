@@ -35,3 +35,17 @@ Phase 7 run, `uesimtun0` was placed in
 
 The network helpers use `sudo` for kernel networking and firewall state. The
 NAT helper does not make its rules persistent across reboot.
+
+Phase 9 controlled-failure helpers are under `failures/`:
+
+- `verify_phase9_baseline.sh` performs a read-only readiness check and refuses
+  to treat the host as ready if the verified kernel, services, listener,
+  interfaces, binaries, baseline configurations, or process state are wrong.
+- `capture_wrong_plmn.sh` records the focused SCTP/NGAP evidence for the
+  wrong-PLMN scenario and refuses to overwrite an earlier capture.
+- `start_gnb_wrong_plmn.sh` starts the gNB with the isolated PLMN `999-71`
+  configuration while preserving the normal PLMN `999-70` file. Its raw
+  console log is local evidence and is ignored by Git until summarized.
+
+Run the baseline verifier before each controlled scenario. Never run a
+failure launcher at the same time as the normal gNB or UE launcher.
