@@ -19,6 +19,10 @@ commands
 It does not start, stop, install, or reconfigure any service. It does not
 change routes, firewall rules, namespaces, or subscriber data.
 
+For a top-to-bottom explanation of the Python, Linux checks, 5G meaning,
+execution flow, and automated tests, read the
+[complete code walkthrough](../docs/07_python_lab_validator_walkthrough.md).
+
 ## Basic Command
 
 From the repository root:

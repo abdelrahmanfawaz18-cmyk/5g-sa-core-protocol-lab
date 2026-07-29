@@ -160,6 +160,11 @@ For the complete live workflow and all options, see the
 python3 -m unittest discover -s tests -v
 ```
 
+The
+[Python validator code walkthrough](docs/07_python_lab_validator_walkthrough.md)
+explains the implementation function by function and connects each check to
+its Linux and 5G protocol meaning.
+
 ## Packet Analysis Quick Reference
 
 | Filter | Purpose |
