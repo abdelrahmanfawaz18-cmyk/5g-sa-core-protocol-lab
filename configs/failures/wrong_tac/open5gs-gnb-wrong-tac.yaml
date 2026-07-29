@@ -1,0 +1,29 @@
+# Phase 9 controlled failure configuration.
+# This file intentionally changes only the gNB Tracking Area Code from the
+# known-good value 1 to unsupported value 2. Do not use it as the baseline.
+
+mcc: '999'          # Mobile Country Code value
+mnc: '70'           # Mobile Network Code value
+
+nci: '0x000000010'  # NR Cell Identity (36-bit)
+idLength: 32        # NR gNB ID length in bits [22...32]
+tac: 2              # Intentional mismatch; baseline AMF serves TAC 1
+
+linkIp: 127.0.0.1   # gNB local address for Radio Link Simulation
+ngapIp: 127.0.0.1   # gNB local endpoint for the N2 interface
+gtpIp: 127.0.0.1    # gNB local endpoint for the N3 interface
+
+# Access and Mobility Management Function address information
+amfConfigs:
+  - address: 127.0.0.5
+    port: 38412
+
+# Single Network Slice Selection Assistance Information supported by the gNB
+slices:
+  - sst: 1
+
+# Ignore SCTP stream number errors for simulator compatibility.
+ignoreStreamIds: true
+
+# Normal terrestrial New Radio access.
+cellAccessType: nr

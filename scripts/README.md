@@ -46,6 +46,11 @@ Phase 9 controlled-failure helpers are under `failures/`:
 - `start_gnb_wrong_plmn.sh` starts the gNB with the isolated PLMN `999-71`
   configuration while preserving the normal PLMN `999-70` file. Its raw
   console log is local evidence and is ignored by Git until summarized.
+- `capture_wrong_tac.sh` records N2 evidence while the gNB advertises the
+  unsupported Tracking Area Code (TAC) `2`.
+- `start_gnb_wrong_tac.sh` starts the gNB with TAC `2` while preserving the
+  known-good TAC `1` file. If NG Setup succeeds, the normal UE is then used to
+  test location handling during registration.
 
 Run the baseline verifier before each controlled scenario. Never run a
 failure launcher at the same time as the normal gNB or UE launcher.

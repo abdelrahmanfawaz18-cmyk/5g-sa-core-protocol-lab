@@ -1,0 +1,38 @@
+Wrong TAC concise log evidence
+==============================
+
+Failure-side UERANSIM gNB
+-------------------------
+2026-07-29 01:15:15.229  Trying to establish SCTP connection to 127.0.0.5:38412
+2026-07-29 01:15:15.230  SCTP connection established
+2026-07-29 01:15:15.231  Sending NG Setup Request
+2026-07-29 01:15:15.236  NG Setup procedure failed
+Cause: misc/unknown-PLMN-or-SNPN
+
+Failure-side Open5GS AMF
+------------------------
+2026-07-29 01:15:15.231  gNB N2 transport accepted from 127.0.0.1
+2026-07-29 01:15:15.236  NG Setup failure
+2026-07-29 01:15:15.236  Cannot find Served TAI
+AMF guidance: check the amf.tai configuration
+
+Recovery-side evidence
+----------------------
+2026-07-29 01:21:24.061  AMF accepted the baseline gNB N2 transport
+2026-07-29 01:21:24.065  Packet capture recorded NG Setup Response
+UERANSIM reported: NG Setup procedure is successful
+2026-07-29 01:22:46.370  Controlled gNB removal completed
+
+Interpretation
+--------------
+The global gNB PLMN matched the AMF in both runs. The failure was caused by
+the Supported Tracking Area List inside NG Setup Request: the gNB advertised
+TAI 999-70-2 while the AMF serves 999-70-1. Open5GS rejected NG Setup and its
+internal log identified the missing served TAI. Restoring TAC 1 produced NG
+Setup Response.
+
+Raw-evidence handling
+---------------------
+The full gNB console log and AMF journal were reviewed. This file retains only
+the lines needed to establish transport success, tracking-area rejection,
+restoration, and recovery. The local raw console log remains ignored by Git.

@@ -1,0 +1,95 @@
+Wrong TAC packet evidence
+=========================
+
+Scenario
+--------
+Known-good Tracking Area Code: 1
+Intentional Tracking Area Code: 2
+Public Land Mobile Network: 999-70 in both runs
+N2 endpoints: gNB 127.0.0.1, AMF 127.0.0.5
+Transport: SCTP
+Application protocol: NGAP
+
+Failure capture
+---------------
+File: wrong_tac.pcap
+Packets: 11
+Size: 1476 bytes
+SHA-256: aace9deef78b6b575cdf55b26cedef64ce1bc7895684df870ab43c4596ae99de
+Strict time order: true
+
+Frame  Direction                    Observation
+1      gNB -> AMF                   SCTP INIT
+2      AMF -> gNB                   SCTP INIT ACK
+3      gNB -> AMF                   SCTP COOKIE ECHO
+4      AMF -> gNB                   SCTP COOKIE ACK
+5      gNB -> AMF                   NG Setup Request
+6      AMF -> gNB                   SCTP acknowledgement
+7      AMF -> gNB                   NG Setup Failure
+8      gNB -> AMF                   SCTP acknowledgement
+9      gNB -> AMF                   SCTP SHUTDOWN
+10     AMF -> gNB                   SCTP SHUTDOWN ACK
+11     gNB -> AMF                   SCTP SHUTDOWN COMPLETE
+
+Frame 5 advertises:
+- Global gNB Mobile Country Code: 999
+- Global gNB Mobile Network Code: 70
+- Supported Tracking Area Code: 2
+- Broadcast Mobile Country Code: 999
+- Broadcast Mobile Network Code: 70
+- Slice/Service Type: 1
+
+Frame 7 contains:
+- NGAP outcome: unsuccessfulOutcome
+- Procedure: NG Setup
+- Cause category: miscellaneous
+- Cause value: unknown-PLMN-or-SNPN
+- Time to wait: 10 seconds
+
+Recovery capture
+----------------
+File: wrong_tac_recovery.pcap
+Packets: 11
+Size: 1512 bytes
+SHA-256: 4b6615b9741cac1b0a5ac7aa81b3ecf89ec6d1505df61c16ec3e2ca43eda733b
+Strict time order: true
+
+Frame  Direction                    Observation
+1      gNB -> AMF                   SCTP INIT
+2      AMF -> gNB                   SCTP INIT ACK
+3      gNB -> AMF                   SCTP COOKIE ECHO
+4      AMF -> gNB                   SCTP COOKIE ACK
+5      gNB -> AMF                   NG Setup Request
+6      AMF -> gNB                   SCTP acknowledgement
+7      AMF -> gNB                   NG Setup Response
+8      gNB -> AMF                   SCTP acknowledgement
+9      gNB -> AMF                   SCTP SHUTDOWN
+10     AMF -> gNB                   SCTP SHUTDOWN ACK
+11     gNB -> AMF                   SCTP SHUTDOWN COMPLETE
+
+Recovery frame 5 advertises:
+- Mobile Country Code: 999
+- Mobile Network Code: 70
+- Tracking Area Code: 1
+- Slice/Service Type: 1
+
+Recovery frame 7 is NG Setup Response from open5gs-amf0.
+
+Interpretation
+--------------
+Both runs used the same Public Land Mobile Network and completed the SCTP
+association. The failure run advertised Tracking Area Identity 999-70-2, but
+the AMF serves 999-70-1. The AMF returned NG Setup Failure. Restoring only
+Tracking Area Code 1 changed the outcome to NG Setup Response.
+
+The standardized cause alone does not distinguish a global PLMN mismatch from
+an unsupported served tracking area. The NG Setup Request fields and AMF log
+provide that distinction.
+
+Review
+------
+The reviewed captures retain only association, NG Setup, acknowledgement, and
+controlled shutdown packets. Periodic SCTP heartbeats were removed. The files
+contain synthetic PLMN and tracking-area values, local loopback endpoints, a
+synthetic gNB identity, and Slice/Service Type 1. They contain no UE NAS
+message, subscriber identity, permanent authentication key, or OPc.

@@ -6,7 +6,7 @@ experiment.
 | Scenario | Current state |
 | --- | --- |
 | `wrong_plmn` | Complete |
-| `wrong_tac` | Planned |
+| `wrong_tac` | Complete |
 | `wrong_subscriber_key` | Planned |
 | `wrong_dnn` | Planned |
 | `missing_nat` | Planned |

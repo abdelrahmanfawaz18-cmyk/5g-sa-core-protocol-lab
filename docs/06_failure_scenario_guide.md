@@ -2,9 +2,10 @@
 
 ## Status
 
-Phase 9 is in progress. The wrong-PLMN scenario is complete: its isolated
-fault, packet evidence, concise logs, restoration, and successful recovery
-have been verified. Wrong TAC is the next scenario.
+Phase 9 is in progress. The wrong-PLMN and wrong-TAC scenarios are complete:
+their isolated faults, packet evidence, concise logs, restorations, and
+successful recovery tests have been verified. Wrong subscriber key or OPc is
+the next scenario.
 
 ## Purpose
 
@@ -46,7 +47,7 @@ verify baseline
 | Order | Scenario | Primary boundary | Main concepts |
 | ---: | --- | --- | --- |
 | 1 | Wrong PLMN — complete | N2 NG Setup | SCTP transport versus NGAP acceptance |
-| 2 | Wrong TAC | N2 or registration location handling | Tracking Area Identity |
+| 2 | Wrong TAC — complete | N2 NG Setup | Tracking Area Identity |
 | 3 | Wrong subscriber key or OPc | NAS authentication | 5G-AKA challenge and response |
 | 4 | Wrong DNN | PDU-session establishment | Registration versus data-session authorization |
 | 5 | Missing NAT | N6 return path | Successful 5G tunnel versus Linux external routing |

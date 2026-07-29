@@ -6,6 +6,7 @@ They exist only for controlled protocol experiments.
 | Directory | Intentional change | Baseline preserved |
 | --- | --- | --- |
 | `wrong_plmn/` | gNB MNC `70` becomes unsupported MNC `71` | `configs/ueransim/open5gs-gnb.yaml` |
+| `wrong_tac/` | gNB TAC `1` becomes unsupported TAC `2` | `configs/ueransim/open5gs-gnb.yaml` |
 
 Every future variant must:
 
