@@ -53,7 +53,7 @@ Open5GS AMF -- Open5GS SMF
 - [x] Successful packet captures collected
 - [x] Packet-analysis guide and Wireshark evidence completed
 - [x] Failure scenarios documented
-- [ ] Python lab validation tool completed
+- [x] Python lab validation tool completed
 
 ## Roadmap Checklist
 
@@ -71,7 +71,7 @@ Open5GS AMF -- Open5GS SMF
 - [x] Phase 7: PDU session and user-plane traffic
 - [x] Phase 8: Packet capture evidence
 - [x] Phase 9: Failure scenarios
-- [ ] Phase 10: Python lab validation tool
+- [x] Phase 10: Python lab validation tool
 - [ ] Phase 11: GitHub README polish
 - [ ] Phase 12: Final project notes and cleanup
 
@@ -94,7 +94,7 @@ Open5GS AMF -- Open5GS SMF
 
 ## Beginner Notes
 
-Work through the roadmap one phase at a time. Phases 1 through 8 are complete:
+Work through the roadmap one phase at a time. Phases 1 through 9 are complete:
 the repository is established, the Ubuntu environment passed preflight,
 Open5GS is installed and healthy, UERANSIM is built, and the shared baseline
 configuration and synthetic subscriber are validated. The gNB connected to
@@ -102,7 +102,9 @@ the AMF, and the UE completed authentication, NAS security activation, and
 registration. The UE then established an IPv4 PDU session, received an
 isolated tunnel interface, and passed bidirectional traffic through the UPF.
 The complete lifecycle is captured, filtered, and interpreted with tshark and
-Wireshark. The next phase introduces controlled failure scenarios.
+Wireshark. Five controlled failures now document how PLMN, TAC, authentication
+material, DNN, and NAT faults appear and how each baseline is restored. The
+current phase automates lab validation with Python.
 
 Before starting the controlled failure scenarios, use the
 [5G Standalone learning handbook](docs/learning/README.md) to build a reusable
@@ -137,6 +139,26 @@ correlate protocol messages. The supporting gate is in the
 The [controlled failure scenario guide](docs/06_failure_scenario_guide.md)
 defines the Phase 9 one-variable method, safety checks, evidence requirements,
 and recovery gate.
+
+## Python Lab Validation Tool
+
+Phase 10 provides a read-only validator that checks required commands,
+MongoDB/Open5GS services, listening protocol endpoints, current gNB and UE
+logs, PDU-session state, the UE tunnel interface, and connectivity from inside
+the UE namespace.
+
+Generate a report with:
+
+```bash
+python3 tools/lab_check.py --output reports/latest_lab_check.md
+```
+
+For the complete live workflow and all options, see the
+[validation tool guide](tools/README.md). Run the automated tests with:
+
+```bash
+python3 -m unittest discover -s tests -v
+```
 
 ## Packet Analysis Quick Reference
 
