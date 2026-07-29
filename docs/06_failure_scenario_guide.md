@@ -2,10 +2,10 @@
 
 ## Status
 
-Phase 9 is in progress. The wrong-PLMN, wrong-TAC, and wrong-subscriber-key
-scenarios are complete: their isolated faults, packet evidence, concise logs,
-restorations, and successful recovery tests have been verified. Wrong DNN is
-the next scenario.
+Phase 9 is in progress. The wrong-PLMN, wrong-TAC, wrong-subscriber-key, and
+wrong-DNN scenarios are complete: their isolated faults, packet evidence,
+concise logs, restorations, and successful recovery tests have been verified.
+Missing NAT is the final scenario.
 
 ## Purpose
 
@@ -49,7 +49,7 @@ verify baseline
 | 1 | Wrong PLMN — complete | N2 NG Setup | SCTP transport versus NGAP acceptance |
 | 2 | Wrong TAC — complete | N2 NG Setup | Tracking Area Identity |
 | 3 | Wrong subscriber key or OPc — complete | NAS authentication | 5G-AKA challenge and response |
-| 4 | Wrong DNN | PDU-session establishment | Registration versus data-session authorization |
+| 4 | Wrong DNN — complete | PDU-session establishment | Registration versus data-session authorization |
 | 5 | Missing NAT | N6 return path | Successful 5G tunnel versus Linux external routing |
 
 PLMN means Public Land Mobile Network. TAC means Tracking Area Code. OPc is
@@ -161,10 +161,38 @@ The faulty UE was stopped and the unchanged baseline UE configuration was
 started. Authentication Response, Security Mode Command, successful
 registration, and PDU Session Resource Setup proved recovery.
 
+## Scenario 4: Wrong DNN
+
+The isolated UE configuration changes only the requested Data Network Name
+from supported DNN `internet` to unsupported DNN `unsupported`.
+
+### Observed Boundary
+
+Authentication, NAS security, and registration succeeded. The AMF then
+reported that DNN `unsupported` was not supported or subscribed in the
+selected slice. The UE received the corresponding status cause and retried
+after T3580 expiry. No new SMF/UPF session or NGAP PDU Session Resource Setup
+occurred.
+
+### What This Distinguishes
+
+```text
+Registration complete       = mobility service is available
+PDU-session request rejected = requested data network is unavailable
+No PFCP session creation     = rejection occurred before UPF programming
+```
+
+### Recovery
+
+The faulty UE was stopped and the unchanged baseline UE requested DNN
+`internet`. The SMF and UPF created a session, NGAP PDU Session Resource Setup
+completed, and the UE received an IPv4 address and tunnel interface.
+
 ## Later Scenarios
 
-The remaining wrong-DNN and missing-NAT scenarios must be implemented and run
-one at a time. Their README files contain the planned boundary.
+The final missing-NAT scenario must be implemented without changing global
+forwarding or unrelated firewall state. Its README contains the planned
+boundary.
 
 ## Completion Gate
 

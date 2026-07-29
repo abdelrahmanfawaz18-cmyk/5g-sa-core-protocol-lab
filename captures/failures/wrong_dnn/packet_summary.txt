@@ -1,0 +1,79 @@
+Wrong DNN — reviewed packet evidence
+====================================
+
+Capture scope
+-------------
+Interface: any
+Capture filter: SCTP port 38412 or PFCP UDP port 8805
+Public evidence contains only reviewed N2 and N4 signaling.
+Raw captures remain local and are ignored by Git.
+
+Failure capture
+---------------
+File: wrong_dnn.pcap
+Packets: 28
+Size: 4168 bytes
+SHA-256: fa8daf46694594f0ff007eca49a3ebe5e1ca54d14f6784e9000c11d6b77112a8
+
+Frame 1-4:   SCTP association establishment
+Frame 5:     NG Setup Request
+Frame 7:     NG Setup Response
+Frame 9:     Initial UE Message carrying Registration Request
+Frame 10:    Authentication Request
+Frame 11:    Authentication Response
+Frame 12:    Security Mode Command
+Frame 14-15: Initial Context Setup Request and Response
+Frame 17:    protected uplink NAS transport carrying the first session request
+Frame 18-19: protected downlink NAS transport; the UE log identifies the
+             result as DNN_NOT_SUPPORTED_OR_NOT_SUBSCRIBED
+Frame 20-21: first T3580-driven retransmission and protected status response
+Frame 22-24: orderly UE context release
+Frame 26-28: orderly SCTP shutdown
+
+No PFCP Session Establishment and no NGAP PDU Session Resource Setup occurred
+for the unsupported DNN. The complete raw capture was also checked: its only
+non-heartbeat PFCP exchange was deletion of a previous successful session
+during startup cleanup, so that unrelated exchange is not in this reviewed
+capture.
+
+NAS traffic after Security Mode is encrypted in this capture. The precise DNN
+cause is therefore correlated with the UE and AMF logs rather than inferred
+from unreadable protected bytes.
+
+Recovery capture
+----------------
+File: recovery.pcap
+Packets: 35
+Size: 5556 bytes
+SHA-256: 7156491cdc859a67c0f5ceff40e3a545cbb11d593e45b066011e14294431a8c4
+
+Frame 1-4:   SCTP association establishment
+Frame 5:     NG Setup Request
+Frame 7:     NG Setup Response
+Frame 9:     Initial UE Message carrying Registration Request
+Frame 10-12: successful authentication and Security Mode
+Frame 14-15: Initial Context Setup Request and Response
+Frame 17-18: protected NAS session signaling
+Frame 19-20: PFCP Session Establishment Request and Response
+Frame 21-23: PDU Session Resource Setup Request and Response
+Frame 24-25: PFCP Session Modification Request and Response
+Frame 27-32: UE release and PFCP access-state modification
+Frame 33-35: orderly SCTP shutdown
+
+Comparison
+----------
+Unsupported DNN:
+  registration succeeds
+  -> protected error response
+  -> T3580 retransmission
+  -> no PFCP session creation
+  -> no PDU Session Resource Setup
+
+Supported DNN "internet":
+  registration succeeds
+  -> PFCP Session Establishment succeeds
+  -> PDU Session Resource Setup succeeds
+  -> UE receives a usable data session
+
+This localizes the failure to DNN subscription/support validation before SMF
+and UPF session creation.

@@ -8,7 +8,7 @@ experiment.
 | `wrong_plmn` | Complete |
 | `wrong_tac` | Complete |
 | `wrong_subscriber_key` | Complete |
-| `wrong_dnn` | Planned |
+| `wrong_dnn` | Complete |
 | `missing_nat` | Planned |
 
 Raw packet captures and console logs are ignored by Git. They must remain

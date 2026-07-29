@@ -56,6 +56,11 @@ Phase 9 controlled-failure helpers are under `failures/`:
 - `start_ue_wrong_subscriber_key.sh` starts a dedicated UE whose synthetic
   permanent key differs from the subscriber record by one hexadecimal digit.
   The known-good UE file and MongoDB subscriber record remain unchanged.
+- `capture_wrong_dnn.sh` records N2 and Packet Forwarding Control Protocol
+  (PFCP) evidence for the session-selection experiment.
+- `start_ue_wrong_dnn.sh` starts a dedicated UE that requests the unsupported
+  Data Network Name (DNN) `unsupported`. Authentication material and the
+  known-good UE configuration remain unchanged.
 
 Run the baseline verifier before each controlled scenario. Never run a
 failure launcher at the same time as the normal gNB or UE launcher.

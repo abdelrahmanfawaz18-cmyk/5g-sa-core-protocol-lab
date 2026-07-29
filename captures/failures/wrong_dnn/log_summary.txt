@@ -1,0 +1,65 @@
+Wrong DNN — concise log evidence
+================================
+
+Failure window
+--------------
+Local time: 2026-07-29 01:59:09 through 01:59:58
+
+UERANSIM UE:
+- selected PLMN 999-70 and TAC 1;
+- completed Radio Resource Control;
+- completed authentication and NAS Security Mode;
+- completed initial registration;
+- sent PDU Session Establishment Request;
+- received DNN_NOT_SUPPORTED_OR_NOT_SUBSCRIBED;
+- retransmitted after NAS timer T3580 expired;
+- received the same cause on every retry;
+- did not create a UE tunnel interface.
+
+Open5GS Access and Mobility Management Function:
+- recorded Registration complete;
+- recorded that requested DNN "unsupported" was not supported or not
+  subscribed in the selected slice;
+- repeated the same warning for each UE retransmission.
+
+Open5GS Session Management Function and User Plane Function:
+- did not create a new session for DNN "unsupported";
+- only removed the previous successful "internet" session during startup
+  cleanup.
+
+T3580 is the UE-side NAS retransmission timer for PDU-session establishment.
+Its expirations are repeated attempts for one unresolved procedure, not
+separate root causes.
+
+Recovery window
+---------------
+Local time: 2026-07-29 02:04:43
+
+UERANSIM UE:
+- completed initial registration;
+- received PDU Session Establishment Accept;
+- established PDU session identity 1;
+- created uesimtun0 with address 10.45.0.4.
+
+Open5GS Access and Mobility Management Function:
+- recorded Registration complete;
+- accepted DNN "internet";
+- selected the Session Management Function.
+
+Open5GS Session Management Function:
+- created one SMF session;
+- recorded DNN "internet";
+- assigned IPv4 address 10.45.0.4.
+
+Open5GS User Plane Function:
+- created one UPF session;
+- recorded APN/DNN "internet";
+- installed the assigned IPv4 address 10.45.0.4.
+
+Root-cause conclusion
+---------------------
+The isolated UE configuration requested DNN "unsupported", while the
+subscriber and core support DNN "internet". The AMF rejected the DNN during
+subscription/slice validation before a new SMF or UPF session was created.
+Restoring "internet" immediately restored PFCP session creation, NGAP
+PDU-session resource setup, address assignment, and the UE tunnel interface.
