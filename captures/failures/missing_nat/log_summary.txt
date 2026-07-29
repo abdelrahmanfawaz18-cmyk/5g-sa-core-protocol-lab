@@ -1,0 +1,52 @@
+Missing NAT — concise operational evidence
+==========================================
+
+Known-good state
+----------------
+- IPv4 forwarding was enabled.
+- Both scoped UE FORWARD rules existed.
+- The scoped UE MASQUERADE rule existed.
+- UE registration and PDU-session establishment succeeded.
+- uesimtun0 used address 10.45.0.5.
+- Baseline ping sent 5 packets and received 5 with 0% loss.
+
+Intentional failure state
+-------------------------
+The guarded helper removed exactly:
+
+  -A POSTROUTING -s 10.45.0.0/16 ! -o ogstun -j MASQUERADE
+
+It then confirmed:
+- IPv4 forwarding remained enabled;
+- the outbound UE forwarding rule remained installed;
+- the return UE forwarding rule remained installed.
+
+The same live UE and PDU session sent five Echo Requests:
+
+  5 packets transmitted, 0 received, 100% packet loss
+
+The packet capture proved GTP-U uplink delivery, UPF decapsulation, and Linux
+external forwarding still worked. No reply returned.
+
+Recovery state
+--------------
+The standard network helper reported:
+- IPv4 forwarding was already enabled;
+- both UE forwarding rules already existed;
+- only the UE masquerade rule was added.
+
+The same live UE and PDU session immediately produced:
+
+  5 packets transmitted, 5 received, 0% packet loss
+
+No UE, gNB, Open5GS service, PDU session, address, route, or forwarding rule
+was restarted or changed between failure and recovery.
+
+Root-cause conclusion
+---------------------
+Without source NAT, the external request retained private source 10.45.0.5.
+The destination could receive the request, but the surrounding network had no
+route for a reply to the isolated UE subnet. MASQUERADE translated the request
+to the host's routable external-interface address and maintained connection
+state so the reply could be reverse-translated to 10.45.0.5 and returned
+through GTP-U.

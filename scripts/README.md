@@ -61,6 +61,11 @@ Phase 9 controlled-failure helpers are under `failures/`:
 - `start_ue_wrong_dnn.sh` starts a dedicated UE that requests the unsupported
   Data Network Name (DNN) `unsupported`. Authentication material and the
   known-good UE configuration remain unchanged.
+- `capture_missing_nat.sh` records GTP-U and Internet Control Message Protocol
+  (ICMP) evidence for the external return-path experiment.
+- `remove_ue_nat_rule.sh` removes exactly one scoped UE masquerade rule while
+  verifying that IPv4 forwarding and both UE forwarding rules stay enabled.
+  Restore the rule immediately with `network/enable_ue_nat.sh`.
 
 Run the baseline verifier before each controlled scenario. Never run a
 failure launcher at the same time as the normal gNB or UE launcher.

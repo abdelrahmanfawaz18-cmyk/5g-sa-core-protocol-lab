@@ -52,7 +52,7 @@ Open5GS AMF -- Open5GS SMF
 - [x] User traffic passed through UPF
 - [x] Successful packet captures collected
 - [x] Packet-analysis guide and Wireshark evidence completed
-- [ ] Failure scenarios documented
+- [x] Failure scenarios documented
 - [ ] Python lab validation tool completed
 
 ## Roadmap Checklist
@@ -70,7 +70,7 @@ Open5GS AMF -- Open5GS SMF
 - [x] Phase 6: Successful registration
 - [x] Phase 7: PDU session and user-plane traffic
 - [x] Phase 8: Packet capture evidence
-- [ ] Phase 9: Failure scenarios
+- [x] Phase 9: Failure scenarios
 - [ ] Phase 10: Python lab validation tool
 - [ ] Phase 11: GitHub README polish
 - [ ] Phase 12: Final project notes and cleanup

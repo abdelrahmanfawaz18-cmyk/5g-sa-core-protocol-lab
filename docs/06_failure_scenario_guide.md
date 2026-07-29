@@ -2,10 +2,9 @@
 
 ## Status
 
-Phase 9 is in progress. The wrong-PLMN, wrong-TAC, wrong-subscriber-key, and
-wrong-DNN scenarios are complete: their isolated faults, packet evidence,
-concise logs, restorations, and successful recovery tests have been verified.
-Missing NAT is the final scenario.
+Phase 9 is complete. All five isolated faults have reviewed packet evidence,
+concise logs, confirmed root causes, exact restorations, and successful
+recovery tests.
 
 ## Purpose
 
@@ -50,7 +49,7 @@ verify baseline
 | 2 | Wrong TAC — complete | N2 NG Setup | Tracking Area Identity |
 | 3 | Wrong subscriber key or OPc — complete | NAS authentication | 5G-AKA challenge and response |
 | 4 | Wrong DNN — complete | PDU-session establishment | Registration versus data-session authorization |
-| 5 | Missing NAT | N6 return path | Successful 5G tunnel versus Linux external routing |
+| 5 | Missing NAT — complete | N6 return path | Successful 5G tunnel versus Linux external routing |
 
 PLMN means Public Land Mobile Network. TAC means Tracking Area Code. OPc is
 the derived Operator Code used by the authentication algorithm. DNN means Data
@@ -188,13 +187,36 @@ The faulty UE was stopped and the unchanged baseline UE requested DNN
 `internet`. The SMF and UPF created a session, NGAP PDU Session Resource Setup
 completed, and the UE received an IPv4 address and tunnel interface.
 
-## Later Scenarios
+## Scenario 5: Missing NAT
 
-The final missing-NAT scenario must be implemented without changing global
-forwarding or unrelated firewall state. Its README contains the planned
-boundary.
+The guarded helper removed only the scoped UE MASQUERADE rule after the UE had
+registered, established a PDU session, received an address, and passed a
+five-packet baseline connectivity test.
+
+### Observed Boundary
+
+The same session continued to carry all five uplink Echo Requests through
+GTP-U and UPF decapsulation. Linux forwarded them externally with private
+source `10.45.0.5`, but no replies returned. IPv4 forwarding and both scoped
+FORWARD rules remained active.
+
+### What This Distinguishes
+
+```text
+GTP-U request visible     = 5G user-plane uplink works
+Request leaves the UPF    = Linux forwarding works
+Private source unchanged  = source NAT is missing
+No external/downlink reply = return path is broken
+```
+
+### Recovery
+
+The standard helper restored only the scoped MASQUERADE rule. The same UE and
+PDU session immediately received five of five replies. The recovery capture
+shows source translation, external replies, reverse translation, and downlink
+GTP-U.
 
 ## Completion Gate
 
-Phase 9 is complete only when all five scenario folders contain reviewed
-evidence and every scenario has a successful rollback test.
+Complete. All five scenario folders contain reviewed evidence, a root cause,
+an exact fix, a concise technical explanation, and successful recovery proof.

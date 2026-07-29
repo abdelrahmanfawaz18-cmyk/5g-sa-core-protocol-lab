@@ -9,7 +9,7 @@ experiment.
 | `wrong_tac` | Complete |
 | `wrong_subscriber_key` | Complete |
 | `wrong_dnn` | Complete |
-| `missing_nat` | Planned |
+| `missing_nat` | Complete |
 
 Raw packet captures and console logs are ignored by Git. They must remain
 local until they have been reduced to the relevant test window and reviewed

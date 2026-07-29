@@ -1,0 +1,79 @@
+Missing NAT — reviewed packet evidence
+======================================
+
+Capture scope
+-------------
+Interface: any
+Capture filter: GTP-U UDP port 2152 or ICMP
+UE address: 10.45.0.5
+Test destination: 8.8.8.8
+Public evidence contains only the five controlled Echo Requests or request/
+reply exchanges. Unrelated background ICMP was removed.
+
+Failure capture
+---------------
+File: missing_nat.pcap
+Packets: 15
+Size: 2044 bytes
+Duration: 4.086081 seconds
+SHA-256: 87cb715ef940ce55adb1ab8bdc2c77b59efc040fcad4b4aa703c0747fb974c15
+
+Each of the five ICMP sequences produces three visible packets:
+
+1. GTP-U uplink packet carrying an inner Echo Request from 10.45.0.5;
+2. decapsulated Echo Request from 10.45.0.5 to 8.8.8.8;
+3. externally forwarded Echo Request whose source is still 10.45.0.5.
+
+Frames 1-3:   sequence 1 request path
+Frames 4-6:   sequence 2 request path
+Frames 7-9:   sequence 3 request path
+Frames 10-12: sequence 4 request path
+Frames 13-15: sequence 5 request path
+
+There are five GTP-U uplink requests and ten visible inner/forwarded request
+observations. There are zero ICMP Echo Replies and zero GTP-U downlink replies.
+
+Interpretation:
+The UE, gNB, N3 GTP-U tunnel, UPF decapsulation, and Linux forwarding path all
+worked. The source address remained private 10.45.0.5 on the external path,
+so the remote network had no usable return route.
+
+Recovery capture
+----------------
+File: recovery.pcap
+Packets: 30
+Size: 4064 bytes
+Duration: 4.019689 seconds
+SHA-256: aa93817d4d962e5af04b642f90053e96e14f2e3eb7531104c61cfee74160a84b
+
+Each of the five ICMP sequences produces six visible packets:
+
+1. GTP-U uplink packet carrying the UE Echo Request;
+2. decapsulated Echo Request sourced by 10.45.0.5;
+3. externally forwarded request after MASQUERADE source translation;
+4. external Echo Reply to the translated address;
+5. reverse-NAT Echo Reply addressed to 10.45.0.5;
+6. GTP-U downlink packet carrying the Echo Reply to the UE.
+
+Frames 1-6:   sequence 1 complete request/reply path
+Frames 7-12:  sequence 2 complete request/reply path
+Frames 13-18: sequence 3 complete request/reply path
+Frames 19-24: sequence 4 complete request/reply path
+Frames 25-30: sequence 5 complete request/reply path
+
+Interpretation:
+Restoring the exact UE MASQUERADE rule restored all five return paths without
+restarting the UE, gNB, or PDU session.
+
+Comparison
+----------
+NAT absent:
+  GTP-U uplink -> UPF decapsulation -> private source forwarded -> no reply
+
+NAT restored:
+  GTP-U uplink -> source translation -> external reply -> reverse translation
+  -> GTP-U downlink -> UE
+
+The unchanged 5G session and immediate recovery localize the failure to N6/
+Linux return-path translation, not registration, PDU-session establishment,
+PFCP, GTP-U, or basic forwarding.
