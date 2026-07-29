@@ -2,9 +2,9 @@
 
 ## Status
 
-Phase 9 is in progress. The wrong-PLMN and wrong-TAC scenarios are complete:
-their isolated faults, packet evidence, concise logs, restorations, and
-successful recovery tests have been verified. Wrong subscriber key or OPc is
+Phase 9 is in progress. The wrong-PLMN, wrong-TAC, and wrong-subscriber-key
+scenarios are complete: their isolated faults, packet evidence, concise logs,
+restorations, and successful recovery tests have been verified. Wrong DNN is
 the next scenario.
 
 ## Purpose
@@ -48,7 +48,7 @@ verify baseline
 | ---: | --- | --- | --- |
 | 1 | Wrong PLMN — complete | N2 NG Setup | SCTP transport versus NGAP acceptance |
 | 2 | Wrong TAC — complete | N2 NG Setup | Tracking Area Identity |
-| 3 | Wrong subscriber key or OPc | NAS authentication | 5G-AKA challenge and response |
+| 3 | Wrong subscriber key or OPc — complete | NAS authentication | 5G-AKA challenge and response |
 | 4 | Wrong DNN | PDU-session establishment | Registration versus data-session authorization |
 | 5 | Missing NAT | N6 return path | Successful 5G tunnel versus Linux external routing |
 
@@ -133,11 +133,38 @@ configs/ueransim/open5gs-gnb.yaml
 An NG Setup Response and the UERANSIM message
 `NG Setup procedure is successful` provide recovery proof.
 
+## Scenario 3: Wrong Subscriber Key
+
+The isolated UE configuration changes one hexadecimal digit of the synthetic
+permanent subscriber key. The known-good UE configuration and MongoDB
+subscriber record remain unchanged.
+
+### Observed Boundary
+
+SCTP, NG Setup, cell selection, Radio Resource Control, and Registration
+Request succeeded. The UE then failed to validate the Message Authentication
+Code in the Authentication Token and sent Authentication Failure with cause
+MAC failure. The AMF returned Authentication Reject and released the UE
+context. NAS security and PDU-session establishment did not start.
+
+### What This Distinguishes
+
+```text
+Registration Request received = access and initial mobility signaling work
+Authentication Failure         = subscriber authentication material differs
+No Security Mode Command       = failure occurred before NAS security
+```
+
+### Recovery
+
+The faulty UE was stopped and the unchanged baseline UE configuration was
+started. Authentication Response, Security Mode Command, successful
+registration, and PDU Session Resource Setup proved recovery.
+
 ## Later Scenarios
 
-The remaining scenario folders are prepared but must be implemented and run
-one at a time. Their README files contain the planned single change and
-expected boundary.
+The remaining wrong-DNN and missing-NAT scenarios must be implemented and run
+one at a time. Their README files contain the planned boundary.
 
 ## Completion Gate
 

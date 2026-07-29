@@ -1,0 +1,59 @@
+Wrong subscriber key — concise log evidence
+================================================
+
+Failure window
+--------------
+Local time: 2026-07-29 01:34:47
+
+UERANSIM UE:
+- selected PLMN 999-70 and TAC 1;
+- established the Radio Resource Control connection;
+- sent Initial Registration;
+- received Authentication Request;
+- reported AUTN validation MAC mismatch;
+- sent Authentication Failure with cause MAC_FAILURE;
+- received Authentication Reject;
+- returned to a deregistered state;
+- did not receive Security Mode Command or establish a PDU session.
+
+Open5GS Access and Mobility Management Function:
+- received InitialUEMessage and Registration Request;
+- selected the Authentication Server Function;
+- recorded Authentication failure cause 20;
+- identified the cause as MAC failure;
+- sent Authentication Reject;
+- released the UE context.
+
+Open5GS Authentication Server Function:
+- selected Unified Data Management while obtaining authentication data.
+
+The AMF line "Unknown UE by SUCI" is normal when no existing in-memory UE
+context matches the Subscription Concealed Identifier. It is not the failure
+cause and does not mean the subscriber record is absent.
+
+Recovery window
+---------------
+Local time: 2026-07-29 01:39:52
+
+UERANSIM UE:
+- received Authentication Request;
+- received Security Mode Command;
+- completed initial registration;
+- received PDU Session Establishment Accept;
+- created uesimtun0 with address 10.45.0.3.
+
+Open5GS Access and Mobility Management Function:
+- received Registration Request;
+- selected the Authentication Server Function and Unified Data Management;
+- recorded Registration Complete;
+- created one AMF session for Data Network Name "internet";
+- selected the Session Management Function.
+
+Root-cause conclusion
+---------------------
+The isolated UE configuration changed one hexadecimal digit of the synthetic
+permanent subscriber key while the core subscriber record remained unchanged.
+The resulting 5G-AKA values did not match, so the UE could not validate the
+Authentication Token and reported MAC failure. Restoring the baseline UE key
+immediately restored authentication, NAS security, registration, and session
+establishment.

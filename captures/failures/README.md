@@ -7,7 +7,7 @@ experiment.
 | --- | --- |
 | `wrong_plmn` | Complete |
 | `wrong_tac` | Complete |
-| `wrong_subscriber_key` | Planned |
+| `wrong_subscriber_key` | Complete |
 | `wrong_dnn` | Planned |
 | `missing_nat` | Planned |
 

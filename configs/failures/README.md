@@ -7,6 +7,7 @@ They exist only for controlled protocol experiments.
 | --- | --- | --- |
 | `wrong_plmn/` | gNB MNC `70` becomes unsupported MNC `71` | `configs/ueransim/open5gs-gnb.yaml` |
 | `wrong_tac/` | gNB TAC `1` becomes unsupported TAC `2` | `configs/ueransim/open5gs-gnb.yaml` |
+| `wrong_subscriber_key/` | Final hexadecimal digit of the synthetic UE key changes | `configs/ueransim/open5gs-ue.yaml` |
 
 Every future variant must:
 

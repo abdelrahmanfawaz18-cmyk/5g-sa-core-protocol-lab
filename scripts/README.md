@@ -51,6 +51,11 @@ Phase 9 controlled-failure helpers are under `failures/`:
 - `start_gnb_wrong_tac.sh` starts the gNB with TAC `2` while preserving the
   known-good TAC `1` file. If NG Setup succeeds, the normal UE is then used to
   test location handling during registration.
+- `capture_wrong_subscriber_key.sh` records N2 NGAP/NAS evidence for the
+  authentication experiment.
+- `start_ue_wrong_subscriber_key.sh` starts a dedicated UE whose synthetic
+  permanent key differs from the subscriber record by one hexadecimal digit.
+  The known-good UE file and MongoDB subscriber record remain unchanged.
 
 Run the baseline verifier before each controlled scenario. Never run a
 failure launcher at the same time as the normal gNB or UE launcher.
