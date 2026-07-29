@@ -1,5 +1,10 @@
 # 5G Core Concepts
 
+For a complete beginner-oriented learning path, start with the
+[5G Standalone learning handbook](learning/README.md). It expands this summary
+into architecture maps, reference tables, procedure walkthroughs, and an
+acronym glossary.
+
 ## Control Plane and User Plane
 
 The control plane decides how a UE connects, authenticates, registers, and receives a data session. The user plane carries the UE's application packets after the session has been established.
