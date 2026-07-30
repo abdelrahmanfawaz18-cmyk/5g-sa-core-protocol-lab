@@ -1,4 +1,4 @@
-Phase 6 N2 tshark summary
+N2 registration tshark summary
 Generated from: captures/successful/n2_registration_attempt.pcap
 
 Capture format: pcap, Linux cooked-mode capture v2

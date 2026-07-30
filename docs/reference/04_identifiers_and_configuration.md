@@ -233,14 +233,16 @@ identifiers such as PLMN, SUPI, or DNN.
 | N3 | gNB and UPF GTP-U endpoints and TEIDs | User-plane tunnelling |
 | UE network | address pool, gateway, routes, forwarding, and NAT | N6 reachability |
 
-## Review Questions
+## Identifier Conclusions
 
-1. What is the difference between a PLMN and a TAI?
-2. Why is a temporary 5G-GUTI useful after initial registration?
-3. Why can a correct SUPI still produce an authentication failure?
-4. What is the difference between a PDU Session ID, PFCP SEID, and GTP-U TEID?
-5. Why can registration succeed when the DNN is wrong?
-
-## Next Document
-
-Continue with [End-to-End Procedures](05_end_to_end_procedures.md).
+- A PLMN identifies the mobile network; a TAI combines that PLMN with a
+  Tracking Area Code.
+- A 5G-GUTI provides a temporary serving identity so the permanent subscriber
+  identity is not required in every subsequent procedure.
+- A matching SUPI only finds the subscriber; authentication also requires
+  matching key, OP/OPc, authentication-management field, and sequence state.
+- PDU Session ID identifies the UE session, PFCP SEID identifies an
+  SMF-to-UPF control session, and GTP-U TEID identifies a user-plane tunnel
+  endpoint.
+- DNN selection occurs during session management, so registration can succeed
+  before an unsupported DNN is rejected.

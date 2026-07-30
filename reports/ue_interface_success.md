@@ -94,11 +94,11 @@ contains:
   decapsulation, and across N6 after address translation.
 
 The concise frame mapping is in
-[`reports/phase_7_tshark_summary.txt`](phase_7_tshark_summary.txt).
+[`reports/user_plane_tshark_summary.txt`](user_plane_tshark_summary.txt).
 
 ## Runtime Network State
 
-IPv4 forwarding and the Phase 7 forwarding and masquerade rules were active.
+IPv4 forwarding and the scoped UE forwarding and masquerade rules were active.
 The temporary same-host diagnostic policy rules were removed, and
 `net.ipv4.conf.ogstun.accept_local` was restored to `0` before the successful
 run. The successful result therefore used the isolated namespace and standard

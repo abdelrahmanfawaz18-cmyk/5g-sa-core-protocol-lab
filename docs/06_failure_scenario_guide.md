@@ -2,15 +2,15 @@
 
 ## Status
 
-Phase 9 is complete. All five isolated faults have reviewed packet evidence,
-concise logs, confirmed root causes, exact restorations, and successful
-recovery tests.
+Complete. All five isolated faults have reviewed packet evidence, concise
+logs, confirmed root causes, exact restorations, and successful recovery
+tests.
 
 ## Purpose
 
-The successful Phase 8 capture established a known-good reference. Phase 9
-changes one variable at a time and compares the resulting protocol boundary
-with that reference.
+The successful full-lifecycle capture establishes the known-good reference.
+Each controlled experiment changes one variable and compares the resulting
+protocol boundary with that reference.
 
 The method is:
 
@@ -45,11 +45,11 @@ verify baseline
 
 | Order | Scenario | Primary boundary | Main concepts |
 | ---: | --- | --- | --- |
-| 1 | Wrong PLMN — complete | N2 NG Setup | SCTP transport versus NGAP acceptance |
-| 2 | Wrong TAC — complete | N2 NG Setup | Tracking Area Identity |
-| 3 | Wrong subscriber key or OPc — complete | NAS authentication | 5G-AKA challenge and response |
-| 4 | Wrong DNN — complete | PDU-session establishment | Registration versus data-session authorization |
-| 5 | Missing NAT — complete | N6 return path | Successful 5G tunnel versus Linux external routing |
+| 1 | Wrong PLMN | N2 NG Setup | SCTP transport versus NGAP acceptance |
+| 2 | Wrong TAC | N2 NG Setup | Tracking Area Identity |
+| 3 | Wrong subscriber key or OPc | NAS authentication | 5G-AKA challenge and response |
+| 4 | Wrong DNN | PDU-session establishment | Registration versus data-session authorization |
+| 5 | Missing NAT | N6 return path | Successful 5G tunnel versus Linux external routing |
 
 PLMN means Public Land Mobile Network. TAC means Tracking Area Code. OPc is
 the derived Operator Code used by the authentication algorithm. DNN means Data

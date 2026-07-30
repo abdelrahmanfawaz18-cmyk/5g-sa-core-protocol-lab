@@ -1,4 +1,4 @@
-Phase 7 PDU-session and user-plane tshark summary
+PDU-session and user-plane tshark summary
 Generated from: captures/successful/pdu_session_and_user_plane.pcap
 
 Capture format: pcap, Linux cooked-mode capture v2

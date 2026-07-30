@@ -310,16 +310,13 @@ private UE subnet to the host's external network.
 | Which core function carries the UE's ping packet? | UPF |
 | Which node encapsulates the uplink packet before N3? | gNB |
 
-## Review Questions
+## Responsibility Boundaries
 
-1. Why are the UDM and UDR not the same thing?
-2. Why does the SMF use PFCP instead of forwarding packets itself?
-3. Which function terminates NAS signalling?
-4. Which function would be examined first if registration succeeds but a PDU
-   session is rejected?
-5. Which functions are involved when the authentication response is wrong?
-
-## Next Document
-
-Continue with
-[Interfaces, Protocols, Planes, and Layers](03_interfaces_protocols_planes_and_layers.md).
+- UDM implements subscriber-management logic; UDR provides the persistent data
+  interface backed by MongoDB.
+- SMF controls sessions through PFCP; UPF performs packet forwarding.
+- AMF terminates NAS signalling and coordinates registration.
+- A post-registration PDU-session rejection begins with SMF, DNN, slice, and
+  subscriber session authorization evidence.
+- Authentication failures require correlation across UE, AMF, AUSF, UDM, UDR,
+  and the synthetic subscriber record.

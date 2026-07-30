@@ -1,4 +1,4 @@
-# Phase 9 controlled failure configuration.
+# Controlled wrong-DNN configuration.
 # This file changes only the requested Data Network Name from the working
 # value "internet" to the intentionally unsupported value "unsupported".
 # Do not use it as the baseline.

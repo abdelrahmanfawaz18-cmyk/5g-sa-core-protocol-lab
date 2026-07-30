@@ -1,11 +1,11 @@
-# Phase 7 Completion Report
+# User-Plane Validation Report
 
 ## Result
 
 **COMPLETE:** The synthetic UE established an IPv4 PDU session and passed
 bidirectional user-plane traffic through the Open5GS UPF.
 
-## Roadmap Gate
+## Verification Gate
 
 | Requirement | Evidence | Result |
 | --- | --- | --- |
@@ -106,6 +106,8 @@ After the test:
 - gNB was stopped;
 - Open5GS and MongoDB remained background services.
 
-## Next Step
+## Related Analysis
 
-Phase 8 is ready to begin.
+The [packet-capture guide](../docs/05_packet_capture_guide.md) provides the
+complete NGAP, NAS-5GS, PFCP, GTP-U, inner-IP, and ICMP interpretation for the
+reviewed lifecycle capture.

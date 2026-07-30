@@ -1,16 +1,15 @@
-# Phase 5 Completion Report
+# Baseline Configuration Validation
 
 ## Result
 
 **COMPLETE:** The single-host baseline is mapped, the repository configuration
 copies are validated, and one matching synthetic subscriber is provisioned.
-Phase 6 is ready to begin with a controlled gNB start.
 
-## Roadmap Requirement
+## Validation Requirement
 
-The Phase 5 roadmap requires one configuration table showing every value that
-must match and an explanation of failures caused by wrong PLMN, TAC, DNN,
-S-NSSAI, key, or OPC.
+The configuration baseline requires one table showing every value that must
+match and an explanation of faults caused by wrong PLMN, TAC, DNN, S-NSSAI,
+key, or OPC.
 
 The required source of truth is:
 
@@ -104,8 +103,8 @@ MongoDB and the nine required 5G Core services are active:
 AMF is ready on `127.0.0.5:38412/SCTP`. SMF and UPF have an active PFCP
 association. `ogstun` is active at `10.45.0.1/16`.
 
-Neither `nr-gnb` nor `nr-ue` was running during Phase 5. No registration or
-PDU-session claim is made in this report.
+Neither `nr-gnb` nor `nr-ue` was running during this configuration-only
+validation. Registration and PDU-session results are documented separately.
 
 ## Completion Gate
 
@@ -116,9 +115,12 @@ PDU-session claim is made in this report.
 - [x] Subscriber and UE authentication data agree.
 - [x] Slice and DNN data agree.
 - [x] User-plane subnet and gateway agree.
-- [x] Phase 6 processes have not started.
+- [x] The configuration-only validation was isolated from live gNB and UE
+  processes.
 
-## Next Controlled Action
+## Related Runtime Evidence
 
-Phase 6 should begin by creating the start scripts, confirming core health,
-starting only the gNB, and proving NG Setup before the UE is started.
+The [registration flow](../docs/03_successful_registration_flow.md) proves NG
+Setup and synthetic UE registration with this baseline. The
+[PDU-session flow](../docs/04_pdu_session_flow.md) proves session admission,
+UPF programming, tunnel creation, and user traffic.

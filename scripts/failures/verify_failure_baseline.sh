@@ -34,7 +34,7 @@ fail() {
   failures=$((failures + 1))
 }
 
-echo "Phase 9 known-good baseline preflight"
+echo "Known-good controlled-failure baseline preflight"
 echo "Repository: $repository_root"
 echo
 
@@ -136,10 +136,10 @@ fi
 
 echo
 if ((failures > 0)); then
-  echo "Phase 9 baseline preflight FAILED with $failures problem(s)." >&2
+  echo "Controlled-failure baseline preflight FAILED with $failures problem(s)." >&2
   echo "Do not start a failure experiment until every check passes." >&2
   exit 1
 fi
 
-echo "Phase 9 baseline preflight PASSED."
+echo "Controlled-failure baseline preflight PASSED."
 echo "The host is ready for one controlled failure experiment."

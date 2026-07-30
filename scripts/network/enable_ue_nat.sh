@@ -49,7 +49,7 @@ else
 fi
 
 echo
-echo "Installed Phase 7 rules:"
+echo "Installed UE data-path rules:"
 sudo iptables -S FORWARD | grep -F "$ue_subnet"
 sudo iptables -t nat -S POSTROUTING | grep -F "$ue_subnet"
 

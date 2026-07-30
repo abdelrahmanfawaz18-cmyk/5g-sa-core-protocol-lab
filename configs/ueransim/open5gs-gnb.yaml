@@ -1,5 +1,5 @@
 # UERANSIM Open5GS gNB baseline derived from upstream revision 2a3ef81.
-# Shared values were validated against Open5GS during Phase 5.
+# Shared values match the validated Open5GS baseline.
 
 mcc: '999'          # Mobile Country Code value
 mnc: '70'           # Mobile Network Code value (2 or 3 digits)

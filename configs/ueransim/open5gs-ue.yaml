@@ -1,5 +1,5 @@
 # UERANSIM Open5GS UE baseline derived from upstream revision 2a3ef81.
-# Shared values were validated against Open5GS during Phase 5.
+# Shared values match the validated Open5GS baseline.
 
 # IMSI number of the UE. IMSI = [MCC|MNC|MSISDN] (In total 15 digits)
 supi: 'imsi-999700000000001'

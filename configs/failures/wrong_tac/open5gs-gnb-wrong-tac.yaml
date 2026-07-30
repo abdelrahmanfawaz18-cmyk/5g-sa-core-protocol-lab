@@ -1,4 +1,4 @@
-# Phase 9 controlled failure configuration.
+# Controlled wrong-TAC configuration.
 # This file intentionally changes only the gNB Tracking Area Code from the
 # known-good value 1 to unsupported value 2. Do not use it as the baseline.
 

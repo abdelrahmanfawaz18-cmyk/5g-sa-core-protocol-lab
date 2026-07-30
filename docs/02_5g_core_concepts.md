@@ -1,9 +1,8 @@
 # 5G Core Concepts
 
-For a complete beginner-oriented learning path, start with the
-[5G Standalone learning handbook](learning/README.md). It expands this summary
-into architecture maps, reference tables, procedure walkthroughs, and an
-acronym glossary.
+The [5G Standalone technical reference](reference/README.md) expands this
+summary into architecture maps, network-function tables, protocol layers,
+end-to-end procedures, diagnostic methods, and an acronym glossary.
 
 ## Control Plane and User Plane
 
@@ -17,7 +16,9 @@ The Network Repository Function is the service registry for the 5G Core. Open5GS
 
 ## AMF
 
-The Access and Mobility Management Function handles gNB connectivity, UE registration, mobility management, and NAS signalling. The UERANSIM gNB will later connect to the AMF over N2 using NGAP over SCTP.
+The Access and Mobility Management Function handles gNB connectivity, UE
+registration, mobility management, and NAS signalling. The UERANSIM gNB
+connects to the AMF over N2 using NGAP over SCTP.
 
 ## SMF
 
@@ -45,7 +46,9 @@ The Policy Control Function supplies policy decisions for sessions and subscribe
 
 ## NSSF
 
-The Network Slice Selection Function helps select an appropriate network slice for a UE. The first version of this lab will use one basic S-NSSAI rather than a multi-slice deployment.
+The Network Slice Selection Function helps select an appropriate network slice
+for a UE. The verified baseline uses one S-NSSAI with SST `1` and no Slice
+Differentiator.
 
 ## Key Interfaces
 

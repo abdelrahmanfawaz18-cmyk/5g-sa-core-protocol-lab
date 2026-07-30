@@ -7,18 +7,20 @@ Raw `.pcap` and `.pcapng` files are ignored by default. A capture must be review
 
 ## Successful Registration
 
-`successful/n2_registration_attempt.pcap` is the Phase 6 N2 capture.
+`successful/n2_registration_attempt.pcap` is the reviewed N2 registration
+capture.
 
 It contains only SCTP traffic between the local gNB address `127.0.0.1` and
 AMF address `127.0.0.5` on port `38412`. The identities are synthetic lab
 values. The capture is intentionally included after endpoint, protocol, size,
 and identity review.
 
-See `reports/phase_6_tshark_summary.txt` for a concise text interpretation.
+See `reports/registration_tshark_summary.txt` for a concise text interpretation.
 
 ## PDU Session And User Plane
 
-`successful/pdu_session_and_user_plane.pcap` is the reviewed Phase 7 capture.
+`successful/pdu_session_and_user_plane.pcap` is the reviewed PDU-session and
+user-plane capture.
 
 It contains the relevant registration and PDU-session setup window, followed
 by five successful ICMP exchanges. The evidence includes NGAP, PFCP,
@@ -29,12 +31,12 @@ Unrelated heartbeats and background traffic were removed. The retained values
 are synthetic lab identity data, local lab addresses, the private host and
 gateway addresses involved in translation, and the public ping target.
 
-See `reports/phase_7_tshark_summary.txt` for the verified frame mapping,
+See `reports/user_plane_tshark_summary.txt` for the verified frame mapping,
 protocol counts, tunnel directions, and file hash.
 
 ## Full Successful Lifecycle
 
-`successful/full_successful_run.pcap` is the Phase 8 analysis capture. It
+`successful/full_successful_run.pcap` is the full-lifecycle analysis capture. It
 contains the reviewed lifecycle from SCTP association and NG Setup through
 registration, PDU-session establishment, bidirectional GTP-U traffic, UE
 context release, and SCTP shutdown.
@@ -53,7 +55,7 @@ and interpretation.
 
 ## Controlled Failure Scenarios
 
-The Phase 9 evidence structure is under `failures/`. Raw failure captures and
+The controlled-failure evidence structure is under `failures/`. Raw failure captures and
 logs remain ignored until each file has been reduced to the relevant protocol
 window and reviewed. The workflow and completion rules are documented in
 `docs/06_failure_scenario_guide.md`.

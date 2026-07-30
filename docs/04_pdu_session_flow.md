@@ -2,7 +2,8 @@
 
 ## Status
 
-Phase 7 completed successfully on 2026-07-25.
+Complete. The PDU session, tunnel state, routing, PFCP control, GTP-U traffic,
+N6 forwarding, and return path are supported by reviewed evidence.
 
 The synthetic UE established an IPv4 PDU session for DNN `internet` on SST
 `1`, received address `10.45.0.4`, and exchanged five ICMP requests and
@@ -19,7 +20,7 @@ In this lab, the PDU session supplies an IPv4 address and a path to the
 `internet` data network. The SMF controls that path, while the UPF forwards the
 actual user packets.
 
-The result extends the Phase 6 control-plane proof into the user plane:
+The result extends the registration control-plane proof into the user plane:
 
 ```text
 UERANSIM UE namespace
@@ -257,23 +258,23 @@ Stop the capture, UE, and gNB with `Ctrl+C` after collecting the result.
 - UE interface and route report:
   [`reports/ue_interface_success.md`](../reports/ue_interface_success.md)
 - Concise packet analysis:
-  [`reports/phase_7_tshark_summary.txt`](../reports/phase_7_tshark_summary.txt)
+  [`reports/user_plane_tshark_summary.txt`](../reports/user_plane_tshark_summary.txt)
 - Successful ping image:
   [`screenshots/ping_success.png`](../screenshots/ping_success.png)
 - Reviewed packet capture:
   [`captures/successful/pdu_session_and_user_plane.pcap`](../captures/successful/pdu_session_and_user_plane.pcap)
 - Completion report:
-  [`reports/phase_7_completion.md`](../reports/phase_7_completion.md)
+  [`reports/user_plane_validation.md`](../reports/user_plane_validation.md)
 
-## Phase 7 Result
+## PDU-Session Result
 
 **COMPLETE:** The PDU session was established, the UE received an address and
 isolated TUN interface, real traffic passed through the UPF, PFCP and
 bidirectional GTP-U are visible in the reviewed capture, and the complete flow
 is documented.
 
-## Next Step
+## Related Packet Analysis
 
-Phase 8 can now turn the successful captures into a reusable packet-analysis
-guide with capture commands, display filters, message landmarks, and
-interpretation techniques.
+The [packet-capture guide](05_packet_capture_guide.md) documents the capture
+commands, display filters, message landmarks, encapsulation, and correlation
+methods used for this result.

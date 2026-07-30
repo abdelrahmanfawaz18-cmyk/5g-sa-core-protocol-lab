@@ -1,6 +1,6 @@
 # Open5GS Baseline Configuration
 
-These YAML files are reviewed Phase 5 copies of the active sections under
+These YAML files are reviewed copies of the active baseline sections under
 `/etc/open5gs/` for Open5GS `2.8.0~noble5`.
 
 They document the single-host baseline:

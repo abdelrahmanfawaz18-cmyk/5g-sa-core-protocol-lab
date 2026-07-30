@@ -232,16 +232,14 @@ NAS session request
 A control-plane success does not guarantee later user-plane success. It only
 proves that the completed control stage worked.
 
-## Review Questions
+## Protocol and Layer Conclusions
 
-1. Is N3 a protocol, interface, plane, or network function?
-2. Why are there both outer and inner IP headers in a GTP-U packet?
-3. Can an NGAP packet exist without containing NAS?
-4. Why is PFCP classified as control plane even though it configures the user
-   plane?
-5. What does UDP port `2152` identify in this lab?
-
-## Next Document
-
-Continue with
-[Identifiers and Configuration](04_identifiers_and_configuration.md).
+- N3 is a reference point between the gNB and UPF; GTP-U is its user-plane
+  tunnelling protocol.
+- A GTP-U packet contains an outer transport header for the tunnel and an
+  inner IP packet created by the UE.
+- NGAP includes both NAS-carrying procedures and access-network procedures
+  such as NG Setup that contain no NAS.
+- PFCP is control-plane traffic because it creates forwarding rules; it does
+  not carry the UE payload governed by those rules.
+- UDP port `2152` identifies the GTP-U endpoint used on N3.

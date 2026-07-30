@@ -1,8 +1,8 @@
-# Python 5G Lab Validator: Complete Code Walkthrough
+# Python 5G Lab Validator: Implementation Reference
 
 ## Purpose
 
-This guide explains the Phase 10 validator from top to bottom:
+This document explains the Python validator from top to bottom:
 
 - what problem the program solves;
 - how its Python design works;
@@ -12,17 +12,17 @@ This guide explains the Phase 10 validator from top to bottom:
 - how the Markdown report is produced;
 - how the automated tests prove the logic.
 
-Open these files side by side:
+## Related Artifacts
 
-1. [`tools/lab_check.py`](../tools/lab_check.py) — the implementation;
-2. this walkthrough — the explanation;
-3. [`tests/test_lab_check.py`](../tests/test_lab_check.py) — controlled proof of
-   the implementation;
-4. [`reports/latest_lab_check.md`](../reports/latest_lab_check.md) — a real
-   successful output.
+| Artifact | Role |
+| --- | --- |
+| [`tools/lab_check.py`](../tools/lab_check.py) | Implementation |
+| This reference | Function-by-function design description |
+| [`tests/test_lab_check.py`](../tests/test_lab_check.py) | Controlled verification of implementation behavior |
+| [`reports/latest_lab_check.md`](../reports/latest_lab_check.md) | Successful live output |
 
-Read this guide in order the first time. On later readings, use the function
-index to jump directly to a topic.
+The function index supports direct navigation between an implementation
+section and the corresponding source.
 
 ## 1. The Program In One Sentence
 
@@ -335,8 +335,8 @@ return code == 0
 and output == "active"
 ```
 
-Why both? A program should not trust output text alone when the command also
-provides a formal exit status.
+Both conditions are required because output text is not sufficient when the
+command also provides a formal exit status.
 
 The result groups all inactive services into one report row. This avoids a
 large table while still identifying every missing dependency.
@@ -417,8 +417,8 @@ SCTP connection established
 NG Setup procedure is successful
 ```
 
-This is based on the Phase 9 PLMN and TAC results. SCTP could succeed while NG
-Setup failed, so transport reachability alone is insufficient.
+The controlled PLMN and TAC experiments confirm that SCTP can succeed while
+NG Setup fails, so transport reachability alone is insufficient.
 
 Protocol meaning:
 
@@ -535,8 +535,8 @@ The tunnel passes only when:
 The report extracts only the lab IPv4 prefix and omits the transient IPv6
 link-local address.
 
-Why check the route too? An interface with an address can exist while traffic
-still follows no usable default path.
+The route is checked separately because an interface can have an address while
+traffic still follows no usable default path.
 
 ## 18. End-To-End Connectivity
 
@@ -761,7 +761,7 @@ means:
 
 ## 26. One Complete Successful Execution
 
-The actual Phase 10 run followed this logic:
+The successful live run followed this logic:
 
 1. `ip`, `ping`, `tcpdump`, and `tshark` were found in `PATH`.
 2. `nr-gnb` and `nr-ue` were found under `~/UERANSIM/build`.
@@ -904,12 +904,13 @@ Possible future extensions:
 - add latency and packet-loss thresholds;
 - add continuous or scheduled health checks.
 
-## 30. A Clear Technical Summary
+## 30. Implementation Summary
 
-A concise explanation of the implementation is:
+A concise description of the implementation is:
 
-> I built a standard-library Python validator for a local 5G Standalone lab.
-> It runs read-only Linux checks through a timeout-controlled subprocess
+> `lab_check.py` is a standard-library Python validator for a local 5G
+> Standalone lab. It runs read-only Linux checks through a timeout-controlled
+> subprocess
 > wrapper, then converts raw command and log evidence into immutable PASS/FAIL
 > results. The checks follow the real dependency chain: required tools,
 > MongoDB and Open5GS services, N2/N3/N4 endpoints, gNB SCTP and NG Setup, UE
@@ -920,23 +921,3 @@ A concise explanation of the implementation is:
 > produces concise sanitized evidence, and 17 unit tests use fake command
 > results to verify success, known failure modes, timeouts, and report output
 > without requiring a live core.
-
-## 31. Knowledge Check
-
-After reading, you should be able to answer:
-
-1. Why are `CommandResult` and `CheckResult` separate?
-2. Why does the program avoid `shell=True`?
-3. Why are there two `ss` commands?
-4. Why is SCTP success not enough to pass the gNB check?
-5. Why does `parse_ue_log` return two results?
-6. Why must ping run inside the UE namespace?
-7. What does `sudo -n` protect against?
-8. Why are checks stored in dependency order?
-9. How is the first suggested action selected?
-10. Why can the tests run without Open5GS or UERANSIM?
-11. What does exit code `1` mean compared with exit code `2`?
-12. What evidence proves the complete user plane rather than host connectivity?
-
-If any answer is unclear, return to the matching numbered section and inspect
-the linked function beside it.

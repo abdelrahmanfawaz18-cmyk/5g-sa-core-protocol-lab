@@ -1,11 +1,11 @@
-# Phase 6 Completion Report
+# Registration Validation Report
 
 ## Result
 
 **COMPLETE:** One synthetic UE successfully registered through the UERANSIM
 gNB with the Open5GS core.
 
-## Roadmap Gate
+## Verification Gate
 
 | Requirement | Evidence | Result |
 | --- | --- | --- |
@@ -95,13 +95,12 @@ After evidence collection:
 - the temporary `uesimtun0` interface was removed automatically;
 - MongoDB and Open5GS remained active as background services.
 
-## Boundary
+## Result Separation
 
 The same run automatically requested an initial PDU session after
-registration. That observation does not complete Phase 7. Phase 7 must
-independently prove the session state, N3 tunnel, UE routing, and user traffic
-through the UPF.
+registration. Registration and session success remain separate results. The
+[PDU-session validation report](user_plane_validation.md) independently proves
+session state, N3 tunnelling, UE routing, and traffic through the UPF.
 
-## Next Step
-
-Phase 7 is ready to begin.
+The registration evidence therefore remains valid without relying on a later
+user-plane outcome.

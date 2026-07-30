@@ -1,4 +1,4 @@
-# Phase 9 controlled failure configuration.
+# Controlled wrong-subscriber-key configuration.
 # This file intentionally changes only the final hexadecimal digit of the
 # synthetic UE authentication key. Do not use it as the baseline.
 

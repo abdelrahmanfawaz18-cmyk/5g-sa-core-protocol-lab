@@ -2,7 +2,8 @@
 
 ## Status
 
-Phase 5 baseline completed on 2026-07-24.
+Complete. The values below define the verified baseline shared by Open5GS,
+UERANSIM, the synthetic subscriber record, and Linux networking.
 
 This document is the source of truth for values shared by Open5GS, UERANSIM,
 the subscriber database, and Linux networking. The baseline uses only
@@ -52,7 +53,7 @@ computers.
 | Authentication AMF | `8000` | UE and subscriber record | UE YAML and this map | Authentication Management Field, not AMF network function |
 | SUCI scheme | `0` | UE YAML | `configs/ueransim/open5gs-ue.yaml` | Null protection scheme for the isolated baseline |
 | DNN/APN | `internet` | UE session and subscriber profile | UE YAML and this map | Subscriber is permitted to request this data network |
-| PDU session type | IPv4 | UE session and subscriber profile | UE YAML and this map | Avoids adding IPv6 routing to the first version |
+| PDU session type | IPv4 | UE session and subscriber profile | UE YAML and this map | Matches the verified IPv4 routing and NAT path |
 | Slice SST | `1` | AMF, NSSF, gNB, UE, subscriber | Open5GS and UERANSIM YAML copies | All components identify the same slice |
 | Slice SD | Not used | Omitted from all active slice definitions | Open5GS and UERANSIM YAML copies | SST-only S-NSSAI is consistent everywhere |
 | UE IPv4 subnet | `10.45.0.0/16` | SMF, UPF, Linux `ogstun` | SMF and UPF YAML copies | SMF address pool and UPF forwarding subnet agree |
@@ -211,20 +212,20 @@ Runtime Open5GS files remain under:
 /etc/open5gs/
 ```
 
-The repository files under `configs/open5gs/` are reviewed Phase 5 copies of
+The repository files under `configs/open5gs/` are reviewed baseline copies of
 the active configuration sections. They are evidence and reproducibility
 references; changing a repository copy does not change a running service.
 
-The UERANSIM programs will later read the repository files directly:
+The UERANSIM run scripts read these repository files directly:
 
 ```text
 configs/ueransim/open5gs-gnb.yaml
 configs/ueransim/open5gs-ue.yaml
 ```
 
-## Phase 5 Validation
+## Baseline Validation
 
-Phase 5 is complete when all of the following are true:
+The validated baseline satisfies all of the following:
 
 - [x] One table identifies every shared value.
 - [x] Open5GS runtime values were read from the active YAML files.
@@ -235,18 +236,17 @@ Phase 5 is complete when all of the following are true:
 - [x] The subscriber permits DNN `internet` on SST `1`.
 - [x] The subscriber requests IPv4 only.
 - [x] The SMF, UPF, and `ogstun` use `10.45.0.0/16` with gateway `10.45.0.1`.
-- [x] No gNB or UE process was started.
+- [x] The baseline files are used by the successful gNB and UE run scripts.
 
-## Phase 6 Entry Conditions
+## Runtime Preconditions
 
-Phase 6 may begin when:
+Before a clean baseline run:
 
-- Open5GS and MongoDB remain active.
+- Open5GS and MongoDB are active.
 - AMF listens on `127.0.0.5:38412/SCTP`.
-- the two UERANSIM YAML files pass parsing and matching checks;
-- the subscriber record passes a read-back check;
-- there are no running `nr-gnb` or `nr-ue` processes before the controlled
-  start sequence.
+- The two UERANSIM YAML files pass parsing and matching checks.
+- The subscriber record passes a read-back check.
+- No stale `nr-gnb` or `nr-ue` process is running.
 
-Phase 6 will separately prove NG Setup, authentication, NAS security, and UE
-registration using logs and packet evidence.
+The successful registration, PDU-session, tunnel, and connectivity evidence
+confirms that these cross-component values form a working configuration.

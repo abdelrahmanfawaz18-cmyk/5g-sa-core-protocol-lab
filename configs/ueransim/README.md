@@ -16,9 +16,9 @@ stored in this repository:
 ```
 
 The YAML files in this directory are based on the official Open5GS examples
-from that revision. Phase 5 validated their shared values against the active
-Open5GS configuration and synthetic subscriber profile. End-to-end behaviour
-will be proven in Phases 6 and 7.
+from that revision. Their shared values match the active Open5GS configuration
+and synthetic subscriber profile. The successful registration and user-plane
+evidence validates their end-to-end behavior.
 
 All subscriber values in these files are isolated lab examples. Never replace
 them with credentials or identifiers from a real mobile subscription.

@@ -2,7 +2,8 @@
 
 ## Status
 
-Phase 8 is complete.
+Complete. The reviewed capture and summaries cover the successful lifecycle
+from SCTP association through UE context release.
 
 This guide explains how to capture, filter, and interpret a successful Open5GS
 and UERANSIM run from SCTP association through UE release.
@@ -63,7 +64,7 @@ selects from packets that are already present.
 If a capture filter excludes a packet, that packet cannot be recovered later.
 Changing a display filter never changes the saved capture.
 
-### Broad Roadmap Capture
+### Broad Full-Lifecycle Capture
 
 ```bash
 sudo tcpdump -i any \
@@ -416,13 +417,14 @@ Before including a capture:
 The raw local capture contained 715 packets and zero kernel drops. The reviewed
 file contains 64 technically relevant packets in strict timestamp order.
 
-## Phase 8 Result
+## Capture-Analysis Result
 
 **COMPLETE:** The repository contains a reviewed full-lifecycle pcap, concise
 tshark summaries, protocol filters, two Wireshark evidence images, and a
 control-plane versus user-plane interpretation.
 
-## Next Step
+## Controlled Comparisons
 
-Phase 9 can use this successful baseline to compare intentionally introduced
-failure symptoms, missing messages, rejected procedures, and recovery steps.
+The [controlled-failure guide](06_failure_scenario_guide.md) uses this
+successful baseline to localize rejected procedures, missing messages,
+user-plane faults, and verified recovery.

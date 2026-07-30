@@ -150,7 +150,7 @@ already saved.
 | Plain ping outside GTP-U | `icmp && !gtp` |
 | Compare UPF control and data | `pfcp || gtp` |
 
-The Phase 7 and Phase 8 focused capture condition was:
+The focused successful capture condition was:
 
 ```text
 sctp port 38412 or udp port 8805 or udp port 2152 or icmp
@@ -319,9 +319,9 @@ configuration at a slightly different point than the initial prediction.
 - Does the UE-subnet MASQUERADE rule exist?
 - Does the host itself reach the external destination?
 
-## Explaining A Technical Finding
+## Failure Analysis Record
 
-A concise technical explanation can use this structure:
+A concise failure record uses this structure:
 
 ```text
 1. Baseline:
@@ -346,18 +346,17 @@ A concise technical explanation can use this structure:
    State what was restored and which successful evidence returned.
 ```
 
-## Review Questions
+## Diagnostic Conclusions
 
-1. Why is a missing packet not automatically proof that the sender never
-   created it?
-2. If PFCP succeeds and uplink GTP-U exists, which earlier layers are already
-   proven?
-3. Why is changing one variable important?
-4. Which evidence sources would be correlated for an authentication failure?
-5. What is the first area to inspect when registration succeeds but no PDU
-   session is accepted?
-
-## Next Document
-
-Use the [Acronym Glossary](07_acronym_glossary.md) as a permanent quick
-reference.
+- A missing captured packet can reflect capture placement, filtering, or
+  protected content; sender logs and adjacent interfaces are needed before
+  concluding that it was never created.
+- Successful PFCP and uplink GTP-U already prove registration, session
+  control, tunnel creation, and the UE-to-UPF direction.
+- Changing one variable preserves causal attribution and makes recovery
+  evidence meaningful.
+- Authentication diagnosis correlates UE and AMF logs, NAS exchange, AUSF/UDM
+  behavior, and the synthetic subscriber record.
+- When registration succeeds but session admission fails, inspect the PDU
+  Session Establishment response, DNN, S-NSSAI, subscriber permissions, and
+  SMF evidence first.

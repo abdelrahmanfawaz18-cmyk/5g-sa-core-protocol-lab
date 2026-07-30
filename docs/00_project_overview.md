@@ -1,26 +1,61 @@
 # Project Overview
 
-## What This Project Is
+## Scope
 
-This project is a local 5G Standalone lab. It will use Open5GS as the 5G Core and UERANSIM as the simulated 5G radio side.
+This project is a complete local 5G Standalone protocol lab. Open5GS provides
+the 5G Core, UERANSIM provides a simulated gNodeB and User Equipment, Linux
+provides the local routing and isolation mechanisms, and Wireshark/tshark
+provide packet-level evidence.
 
-In simple terms:
+The validated baseline demonstrates:
 
-- The simulated UE acts like a test phone.
-- The simulated gNB acts like a test 5G base station.
-- Open5GS acts like the mobile core network.
-- Wireshark and tshark will prove what happened by showing packets.
-- Python scripts will later check whether the lab is working.
+- gNB SCTP association and NG Setup with the AMF;
+- synthetic UE authentication and NAS security;
+- successful UE registration;
+- IPv4 PDU-session establishment;
+- PFCP control between SMF and UPF;
+- bidirectional GTP-U traffic between gNB and UPF;
+- N6 forwarding and Network Address Translation;
+- end-to-end ICMP traffic from an isolated UE namespace;
+- five controlled fault experiments with recovery evidence;
+- automated read-only validation with Python.
 
-## What This Project Is Not
+## System Model
 
-This is not a commercial mobile network. It is not connected to a real carrier. It must not contain real subscriber secrets.
+```text
+UERANSIM UE
+  -> simulated radio link
+  -> UERANSIM gNB
+      -> N2 NGAP/SCTP -> Open5GS AMF and control-plane functions
+      -> N3 GTP-U     -> Open5GS UPF
+                            -> N6 IP -> Data Network
+                 Open5GS SMF -> N4 PFCP -> Open5GS UPF
+```
 
-## Phase 1 Goal
+The simulated UE behaves as a protocol endpoint, the simulated gNB connects
+the access and core sides, and the UPF carries the UE's IP traffic. The AMF
+manages access and registration state but does not forward user packets.
 
-Phase 1 creates the repository shell. That means the project folder, Git repository, README, `.gitignore`, documentation folder, and placeholder folders exist before any software installation begins.
+## Evidence Model
+
+The project correlates three evidence sources:
+
+1. UERANSIM and Open5GS logs explain component decisions.
+2. Packet captures prove message exchange and protocol layering.
+3. Linux interfaces, namespaces, routes, forwarding, and NAT prove the local
+   user-plane path.
+
+No single source is treated as sufficient when a procedure crosses multiple
+functions or interfaces.
+
+## Boundaries
+
+This is a single-host protocol lab, not a commercial mobile network. UERANSIM
+does not implement a complete over-the-air New Radio physical layer, and the
+external data-network test uses ordinary IP connectivity from the host.
 
 ## Lab-Only Data Rule
 
-Use only fake subscriber information in this repository. If a value looks like a secret, key, token, or production identifier, do not commit it.
-
+Only synthetic subscriber and network information belongs in the repository.
+Production identities, authentication material, tokens, private credentials,
+and unrelated packet traffic must not be committed.

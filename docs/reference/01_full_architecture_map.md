@@ -189,16 +189,13 @@ useful to recognize even though the current baseline does not require them.
 These functions do not sit in the UE user-packet path merely because they
 exist. Each is contacted only when its service is needed.
 
-## Review Questions
+## Architectural Conclusions
 
-1. Why is N1 drawn as a logical connection rather than a direct IP link?
-2. Which function carries the UE's user packets: the AMF or the UPF?
-3. Which function tells the UPF how to forward a session?
-4. Why can the gNB successfully connect to the AMF while Internet traffic
-   still fails?
-5. Which part of this lab is simulated rather than a complete real radio
-   implementation?
-
-## Next Document
-
-Continue with [Network Functions](02_network_functions.md).
+- N1 is a logical UE-to-AMF relationship; the gNB transports NAS messages
+  inside NGAP rather than terminating them.
+- The UPF carries UE user packets. The AMF handles access and mobility control.
+- The SMF installs forwarding state on the UPF through PFCP.
+- gNB-to-AMF success proves N2 control-plane readiness, not N3/N6 user-plane
+  reachability.
+- UERANSIM models UE and gNB protocol behavior without implementing a complete
+  over-the-air New Radio physical layer.

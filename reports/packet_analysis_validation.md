@@ -1,11 +1,11 @@
-# Phase 8 Completion Report
+# Packet-Analysis Validation Report
 
 ## Result
 
 **COMPLETE:** One continuous successful 5G SA lifecycle was captured,
 reviewed, summarized, and interpreted with tshark and Wireshark.
 
-## Roadmap Gate
+## Verification Gate
 
 | Requirement | Evidence | Result |
 | --- | --- | --- |
@@ -83,6 +83,8 @@ only Wireshark, the reviewed capture filename, protocol filters, packet rows,
 and decoded fields. No unrelated desktop content or personal filesystem path
 is visible.
 
-## Next Step
+## Related Failure Evidence
 
-Phase 9 is ready to begin.
+The [controlled-failure guide](../docs/06_failure_scenario_guide.md) and
+[`captures/failures/`](../captures/failures/README.md) compare five isolated
+faults with this successful capture baseline.

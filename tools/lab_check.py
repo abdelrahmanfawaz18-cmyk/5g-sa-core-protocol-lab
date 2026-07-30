@@ -131,7 +131,7 @@ def check_required_commands(
     *,
     which: Callable[[str], str | None] = shutil.which,
 ) -> CheckResult:
-    """Confirm all roadmap-required commands are available."""
+    """Confirm all required lab commands are available."""
 
     found: list[str] = []
     missing: list[str] = []

@@ -2,12 +2,13 @@
 
 ## Status
 
-Phase 6 completed successfully on 2026-07-24.
+Complete. The baseline gNB and synthetic UE registration are supported by
+correlated simulator, core-log, state, and packet-capture evidence.
 
 One UERANSIM gNB connected to the Open5GS AMF, and one synthetic UE completed
 5G-AKA authentication, NAS security activation, and initial registration.
 
-## What This Phase Proves
+## What The Evidence Proves
 
 The result proves that the control-plane path works across:
 
@@ -31,19 +32,19 @@ The gNB successfully established its N2 relationship with the AMF. The UE was
 then identified, authenticated, placed under NAS security, and registered.
 
 Registration proves control-plane admission. It does not, by itself, prove
-that user packets can traverse N3, the UPF, and N6. That user-plane validation
-belongs to Phase 7.
+that user packets can traverse N3, the UPF, and N6. The independent
+PDU-session evidence validates that user-plane path.
 
 ## Evidence
 
 - Packet capture:
   [`captures/successful/n2_registration_attempt.pcap`](../captures/successful/n2_registration_attempt.pcap)
 - Tshark summary:
-  [`reports/phase_6_tshark_summary.txt`](../reports/phase_6_tshark_summary.txt)
+  [`reports/registration_tshark_summary.txt`](../reports/registration_tshark_summary.txt)
 - UE success image:
   [`screenshots/successful_registration.png`](../screenshots/successful_registration.png)
 - Completion report:
-  [`reports/phase_6_completion.md`](../reports/phase_6_completion.md)
+  [`reports/registration_validation.md`](../reports/registration_validation.md)
 
 The capture contains only loopback N2 traffic between `127.0.0.1` and
 `127.0.0.5`. Its subscriber identity is synthetic and restricted to this lab.
@@ -223,14 +224,16 @@ Initial Registration is successful
 Stop the capture, UE, and gNB with `Ctrl+C` after the required evidence has
 been collected.
 
-## Phase 6 Result
+## Registration Result
 
 **COMPLETE:** One synthetic UE registered successfully. NG Setup,
 authentication, NAS security activation, Registration Accept, and Registration
 Complete are supported by correlated capture, simulator state, simulator
 output, and core-log evidence.
 
-## Next Step
+## Related User-Plane Evidence
 
-Phase 7 must independently verify the PDU-session state, UE tunnel, N3 GTP-U
-path, routing, and real user traffic through the UPF.
+Registration establishes the UE's mobility-management state. The independent
+[PDU-session and user-plane analysis](04_pdu_session_flow.md) proves session
+admission, tunnel creation, routing, and bidirectional traffic through the
+UPF.

@@ -2,7 +2,8 @@
 
 ## Status
 
-Phase 2 environment preflight completed successfully on 2026-07-23 and was audited against the full project roadmap on 2026-07-24.
+Complete. The Ubuntu host, packet-analysis tools, Open5GS services, MongoDB,
+UERANSIM executables, SCTP support, and tunnel support are verified.
 
 ## Environment Type
 
@@ -10,13 +11,13 @@ The lab runs on a native, dual-boot Ubuntu installation on 64-bit x86 hardware.
 
 ## Operating System
 
-- Distribution: Ubuntu 24.04.3 LTS
+- Distribution: Ubuntu 24.04 LTS
 - Release: 24.04
 - Codename: Noble Numbat
 
 ## Kernel
 
-- Linux kernel: `6.17.0-35-generic`
+- End-to-end validated Linux kernel: `6.17.0-41-generic`
 - Architecture: `x86_64`
 
 ## Hardware Capacity
@@ -24,7 +25,8 @@ The lab runs on a native, dual-boot Ubuntu installation on 64-bit x86 hardware.
 - Logical CPUs: 24
 - Usable memory: approximately 15 GiB
 - Available lab-filesystem space during preflight: 33 GiB
-- The system meets the roadmap minimum of 4 CPU cores, 8 GB RAM, and 30 GB free disk space
+- The system exceeds the baseline minimum of 4 CPU cores, 8 GB RAM, and 30 GB
+  free disk space
 
 ## Git
 
@@ -62,21 +64,24 @@ The lab runs on a native, dual-boot Ubuntu installation on 64-bit x86 hardware.
 
 `/dev/net/tun` exists as a character device. Linux TUN/TAP support is available for the tunnel interfaces required later in the lab.
 
-## Phase 2 Result
+## Environment Preflight Result
 
-**READY:** This Ubuntu environment passed every Phase 2 roadmap completion gate and is ready for Phase 3.
+**PASS:** The Ubuntu environment satisfies the CPU, memory, storage,
+networking, packet-capture, Python, Git, SCTP, and TUN requirements.
 
 ## Open5GS Installation
 
-Phase 3 was completed on 2026-07-24 using packages built for Ubuntu 24.04:
+The core installation was completed using packages built for Ubuntu 24.04:
 
 - Open5GS: `2.8.0~noble5`
 - MongoDB Community: `8.0.28`
 - Installation method: Open5GS release PPA and the official MongoDB 8.0 repository
 - MongoDB service: active, enabled at boot, and responding to database commands
-- Open5GS WebUI: not installed because it is optional and not required for the Phase 3 completion gate
+- Open5GS WebUI: not installed because subscriber provisioning and validation
+  use direct database and command-line workflows
 
-MongoDB has not created the `open5gs` database yet because no subscriber data has been written. The UDR and PCF configurations already point to `mongodb://localhost/open5gs`; MongoDB will create the database when data is first stored in a later phase.
+The UDR and PCF configurations use `mongodb://localhost/open5gs`. The database
+contains the synthetic subscriber used by the verified baseline.
 
 ## Open5GS Services
 
@@ -105,7 +110,9 @@ Startup logs confirm that the required control-plane functions registered with t
 - Configuration directory: `/etc/open5gs/`
 - Log directory: `/var/log/open5gs/`
 - Function-specific YAML configuration files and logs are stored in these directories
-- The package defaults are still in place; no PLMN, TAC, DNN, S-NSSAI, subscriber, routing, or NAT configuration was changed in Phase 3
+- The initial package installation retained its defaults. The active lab
+  baseline and reviewed repository copies are documented in
+  [`configuration_map.md`](configuration_map.md).
 
 ## Verified Open5GS Endpoints
 
@@ -119,13 +126,13 @@ Startup logs confirm that the required control-plane functions registered with t
 | NRF | Service registration and discovery | `127.0.0.10:7777` over TCP |
 | MongoDB | Subscriber and policy data | `127.0.0.1:27017` over TCP |
 
-## Phase 3 Result
+## Core Installation Result
 
 **COMPLETE:** Open5GS is installed, the required services are healthy, configuration and log locations are known, listening endpoints are verified, and the core functions are documented.
 
 ## UERANSIM Installation
 
-Phase 4 was completed on 2026-07-24:
+The UERANSIM build was completed from the official source revision:
 
 - UERANSIM version: `3.3.0`
 - Official source revision:
@@ -139,18 +146,18 @@ Phase 4 was completed on 2026-07-24:
 - Project configuration templates and field explanations are stored under
   `configs/ueransim/`
 
-The executables are not installed globally, so the documented paths must be
-used when they are started in a later phase.
+The executables are not installed globally. The run scripts resolve them from
+`~/UERANSIM` or the `UERANSIM_ROOT` environment variable.
 
-## Phase 4 Result
+## UERANSIM Build Result
 
 **COMPLETE:** UERANSIM is built, the required executables are verified, the
 official Open5GS example configurations are copied into the repository, and
 the fields that must match the core and subscriber are documented.
 
-## Next Step
+## Integrated Result
 
-Phase 5 completed the shared baseline configuration and subscriber validation.
-Phase 6 then proved NG Setup, authentication, NAS security activation, and
-successful registration for one synthetic UE. Phase 7 may begin with
-independent PDU-session and user-plane validation.
+The installed platform supports the complete verified workflow: NG Setup,
+synthetic subscriber authentication, NAS security, registration, IPv4
+PDU-session establishment, namespace tunnel creation, PFCP and GTP-U traffic,
+and bidirectional external connectivity.

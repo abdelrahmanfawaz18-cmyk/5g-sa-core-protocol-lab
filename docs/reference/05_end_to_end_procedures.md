@@ -403,16 +403,15 @@ create them.
 | Data | Bidirectional GTP-U and inner ICMP | gNB and UPF | User traffic crosses N3 and N6 |
 | Cleanup | UE Context Release and PFCP cleanup | AMF, gNB, SMF, UPF | State is released |
 
-## Review Questions
+## Procedure Conclusions
 
-1. Why does SCTP success not prove NG Setup success?
-2. Why does Registration Accept not prove Internet connectivity?
-3. At what stage does the SMF program the UPF?
-4. Why are PFCP Session Modification and NGAP PDU Session Resource Setup both
-   involved?
-5. What extra conditions does a successful bidirectional ping prove?
-
-## Next Document
-
-Continue with
-[Packet Analysis and Troubleshooting](06_packet_analysis_and_troubleshooting.md).
+- SCTP proves transport reachability; NG Setup proves AMF acceptance of the
+  gNB configuration.
+- Registration Accept establishes mobility-management state, not a data
+  session or external route.
+- The SMF begins programming the UPF during PFCP Session Establishment and
+  completes access-side tunnel state through PFCP Session Modification.
+- NGAP PDU Session Resource Setup configures the gNB-side resource while PFCP
+  configures UPF forwarding.
+- Bidirectional namespace ping additionally proves UE addressing, routing,
+  N3 encapsulation, UPF forwarding, N6/NAT behavior, and the return path.

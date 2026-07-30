@@ -1,4 +1,4 @@
-# Phase 9 controlled failure configuration.
+# Controlled wrong-PLMN configuration.
 # This file intentionally changes only the gNB Mobile Network Code from the
 # known-good value 70 to unsupported value 71. Do not use it as the baseline.
 
